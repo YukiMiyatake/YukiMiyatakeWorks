@@ -1,0 +1,10 @@
+*.env
+*.so
+*.exe
+
+.vscode/*
+
+*.pem
+.env
+.credentials
+aws.json
