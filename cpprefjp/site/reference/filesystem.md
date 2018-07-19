@@ -27,7 +27,7 @@
 | [`file_type`](filesystem/file_type.md) | ファイル種別を表す列挙型 (enum) | C++17 |
 | [`perms`](filesystem/perms.md) | 権限を表す列挙型 (enum) | C++17 |
 | [`perm_options`](filesystem/perm_options.md) | 権限オプションを表す列挙型 (enum) | C++17 |
-| [`copy_options`](filesystem/copy_options.md.nolink) | コピーオプションを表す列挙型 (enum) | C++17 |
+| [`copy_options`](filesystem/copy_options.md) | コピーオプションを表す列挙型 (enum) | C++17 |
 | [`directory_options`](filesystem/directory_options.md.nolink) | ディレクトリオプションを表す列挙型 (enum) | C++17 |
 | [`file_time_type`](filesystem/file_time_type.md) | ファイル情報で使用する時間の型 (type alias) | C++17 |
 
@@ -42,7 +42,7 @@
 | [`absolute`](filesystem/absolute.md.nolink) | パスを絶対パスに変換する (function) | C++17 |
 | [`canonical`](filesystem/canonical.md.nolink) | パスを正規化する (function) | C++17 |
 | [`weakly_canonical`](filesystem/weakly_canonical.md.nolink) | `canonical`よりも弱い要件でパスを正規化する (function) | C++17 |
-| [`read_symlink`](filesystem/read_symlink.md.nolink) | シンボリックリンクが指すパスを取得する (function) | C++17 |
+| [`read_symlink`](filesystem/read_symlink.md) | シンボリックリンクが指すパスを取得する (function) | C++17 |
 | [`relative`](filesystem/relative.md.nolink) | パスを現在の作業ディレクトリからの相対パスに変換する (function) | C++17 |
 | [`proximate`](filesystem/proximate.md.nolink) | パスを現在の作業ディレクトリからの相対パスに変換する (function) | C++17 |
 
@@ -52,8 +52,8 @@
 | 名前 | 説明 | 対応バージョン |
 |------|------|----------------|
 | [`copy`](filesystem/copy.md.nolink) | コピーする (function) | C++17 |
-| [`copy_file`](filesystem/copy_file.md.nolink) | ファイルをコピーする (function) | C++17 |
-| [`copy_symlink`](filesystem/copy_symlink.md.nolink) | シンボリックリンクをコピーする (function) | C++17 |
+| [`copy_file`](filesystem/copy_file.md) | ファイルをコピーする (function) | C++17 |
+| [`copy_symlink`](filesystem/copy_symlink.md) | シンボリックリンクをコピーする (function) | C++17 |
 | [`create_directory`](filesystem/create_directory.md) | ディレクトリを作成する (function) | C++17 |
 | [`create_directories`](filesystem/create_directories.md) | ディレクトリ階層を作成する (function) | C++17 |
 | [`create_directory_symlink`](filesystem/create_directory_symlink.md) | ディレクトリに対するシンボリックリンクを作成する (function) | C++17 |
