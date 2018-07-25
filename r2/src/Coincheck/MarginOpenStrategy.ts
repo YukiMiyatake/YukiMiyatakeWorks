@@ -12,7 +12,7 @@ export default class MarginOpenStrategy implements CashMarginTypeStrategy {
       throw new Error();
     }
     const request = {
-      pair: 'btc_jpy',
+      pair: 'btc_eth',
       order_type: this.getBrokerOrderType(order),
       amount: order.size,
       rate: order.price

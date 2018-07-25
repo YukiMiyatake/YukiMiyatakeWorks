@@ -47,7 +47,7 @@ export default class BrokerAdapterRouter {
   async getPositions(broker: Broker): Promise<Map<string, number>> {
     try {
       // for backword compatibility, use getBtcPosition if getPositions is not defined
-      if (!_.isFunction(this.brokerAdapterMap[broker].getPositions) && this.configStore.config.symbol === 'BTC/JPY') {
+      if (!_.isFunction(this.brokerAdapterMap[broker].getPositions) && this.configStore.config.symbol === 'BTC/ETH') {
         const btcPosition = await this.brokerAdapterMap[broker].getBtcPosition();
         return new Map<string, number>([['BTC', btcPosition]]);
       }

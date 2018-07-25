@@ -8,7 +8,7 @@ export default class CashStrategy implements CashMarginTypeStrategy {
     const accounts = await this.brokerApi.getAccountBalance();
     const account = accounts.find(b => b.currency === 'BTC');
     if (account === undefined) {
-      throw new Error ('Unable to find the account.');
+      throw new Error ('Unable to find the account.1');
     }
     return account.balance;
   }

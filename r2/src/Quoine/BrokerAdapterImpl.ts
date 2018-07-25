@@ -70,7 +70,7 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
   private mapOrderToSendOrderRequest(order: Order): SendOrderRequest {
     let productId: string;
     switch (order.symbol) {
-      case 'BTC/JPY':
+      case 'BTC/ETH':
         productId = '5';
         break;
       default:
