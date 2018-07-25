@@ -36,10 +36,10 @@ export default class NetOutStrategy implements CashMarginTypeStrategy {
       .filter(p => p.side === targetSide)
       .filter(p => almostEqual(p.amount, order.size, 1))
       .value();
-    if (order.symbol !== 'BTC/JPY') {
+    if (order.symbol !== 'BTC/ETH') {
       throw new Error('Not supported');
     }
-    const pair = 'btc_jpy';
+    const pair = 'btc_eth';
     const rate = order.type === OrderType.Market ? undefined : order.price;
     const request = { pair, rate };
     if (candidates.length === 0) {

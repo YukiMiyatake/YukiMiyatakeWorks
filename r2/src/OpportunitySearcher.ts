@@ -145,9 +145,9 @@ export default class OppotunitySearcher extends EventEmitter {
 
   private formatPairSummary(pair: OrderPair, pairSummary: PairSummary) {
     const { entryProfit, entryProfitRatio, currentExitCost } = pairSummary;
-    const entryProfitString = `Entry PL: ${_.round(entryProfit)} JPY (${entryProfitRatio}%)`;
+    const entryProfitString = `Entry PL: ${_.round(entryProfit)} ETH (${entryProfitRatio}%)`;
     if (currentExitCost) {
-      const currentExitCostText = `Current exit cost: ${_.round(currentExitCost)} JPY`;
+      const currentExitCostText = `Current exit cost: ${_.round(currentExitCost)} ETH`;
       return `[${[
         OrderUtil.toShortString(pair[0]),
         OrderUtil.toShortString(pair[1]),
