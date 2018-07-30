@@ -2,6 +2,11 @@ import AppRoot from './AppRoot';
 import { exec } from 'child_process';
 import container from './container.config';
 
+
+import * as ccxt from 'ccxt';
+ 
+console.log (ccxt.exchanges) // print all available exchanges
+
 process.title = 'r2app';
 const app = new AppRoot(container);
 app.start();

@@ -65,8 +65,8 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
   async cancel(order: Order): Promise<void> {
     let productCode = '';
     switch (order.symbol) {
-      case 'BTC/ETH':
-        productCode = 'BTC_ETH';
+      case 'BTC/JPY':
+        productCode = 'BTC_JPY';
         break;
       default:
         throw new Error('Not implemented.');
@@ -98,8 +98,8 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
 
     let productCode = '';
     switch (order.symbol) {
-      case 'BTC/ETH':
-        productCode = 'BTC_ETH';
+      case 'BTC/JPY':
+        productCode = 'BTC_JPY';
         break;
       default:
         throw new Error('Not implemented.');
