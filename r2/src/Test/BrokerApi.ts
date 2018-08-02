@@ -24,7 +24,7 @@ export default class BrokerApi {
   private broker;
 
   constructor(private readonly key: string, private readonly secret: string) {
-    this.broker = new ccxt.bitflyer  ({ 
+    this.broker = new ccxt.bitflyer({ 
       'apiKey': this.key, 
       'secret': this.secret
     })
@@ -47,20 +47,29 @@ export default class BrokerApi {
   }
 
   async getExecutions(param: ExecutionsParam): Promise<ExecutionsResponse> {
-    const path = '/v1/me/getexecutions';
-    const response = await this.get<ExecutionsResponse, ExecutionsParam>(path, param);
-    return response.map(x => new Execution(x));
+    var result = await this.broker.fetchTrades('BTC/JPY', 30);
+
+    return (result.map(x => {
+      new Execution({
+        id: x.info.id,
+        side: x.info.side,
+        price: x.info.price,
+        size: x.info.size,
+        exec_date: x.info.exec_date,
+        child_order_acceptance_id: x.order
+      });
+    }));
   }
 
   async getBalance(): Promise<BalanceResponse> {
-    let balance = await this.broker.fetchBalance ()
+    var balance = await this.broker.fetchBalance ()
     //console.log(balance);
     return balance.info.map(x => new Balance(x));
   }
 
   // 非同期処理もっと工夫したいがMockなので
   async getBoard(): Promise<BoardResponse> {
-    let result = await this.broker.fetchOrderBook( 'BTC/JPY');
+    var result = await this.broker.fetchOrderBook( 'BTC/JPY');
     //console.log(new BoardResponse(result));
     var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
     var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
