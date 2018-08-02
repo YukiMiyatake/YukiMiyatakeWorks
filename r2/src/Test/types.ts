@@ -1,7 +1,7 @@
 // tslint:disable:variable-name
 import { Castable, cast, element } from '@bitr/castable';
 
-class PriceSizePair extends Castable {
+export class PriceSizePair extends Castable {
   @cast price: number;
   @cast size: number;
 }
