@@ -48,11 +48,11 @@ export interface ExecutionsParam {
 
 export class Execution extends Castable {
   @cast id: number;
-  @cast child_order_id: string;
+//  @cast child_order_id: string;
   @cast side: string;
   @cast price: number;
   @cast size: number;
-  @cast commission: number;
+//  @cast commission: number;
   @cast(Date) exec_date: Date;
   @cast child_order_acceptance_id: string;
 }
