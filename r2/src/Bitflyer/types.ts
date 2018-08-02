@@ -7,7 +7,7 @@ class PriceSizePair extends Castable {
 }
 
 export class BoardResponse extends Castable {
-  @cast mid_price: number;
+//  @cast mid_price: number;
   @cast
   @element(PriceSizePair)
   bids: PriceSizePair[];

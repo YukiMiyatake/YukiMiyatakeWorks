@@ -11,16 +11,24 @@ import {
   ExecutionsParam,
   Execution,
   BalanceResponse,
+  PriceSizePair,
   BoardResponse,
   ChildOrder,
   Balance
 } from './types';
+import * as ccxt from 'ccxt';
 
 export default class BrokerApi {
   private readonly baseUrl = 'https://api.bitflyer.jp';
   private readonly webClient: WebClient = new WebClient(this.baseUrl);
+  private broker;
 
-  constructor(private readonly key: string, private readonly secret: string) {}
+  constructor(private readonly key: string, private readonly secret: string) {
+    this.broker = new ccxt.bitflyer  ({ 
+      'apiKey': this.key, 
+      'secret': this.secret
+    })
+  }
 
   async sendChildOrder(request: SendChildOrderRequest): Promise<SendChildOrderResponse> {
     const path = '/v1/me/sendchildorder';
@@ -45,14 +53,45 @@ export default class BrokerApi {
   }
 
   async getBalance(): Promise<BalanceResponse> {
-    const path = '/v1/me/getbalance';
-    const response = await this.get<BalanceResponse>(path);
-    return response.map(x => new Balance(x));
+    let balance = await this.broker.fetchBalance ()
+    //console.log(balance);
+
+ return balance.info.map(x => new Balance(x));
+ 
+
+
+//    const path = '/v1/me/getbalance';
+//    const response = await this.get<BalanceResponse>(path);
+ //   return response.map(x => new Balance(x));
   }
 
   async getBoard(): Promise<BoardResponse> {
-    const path = '/v1/board';
+/*
+    let result = await this.broker.fetchOrderBook( 'BTC/JPY');
+ console.log(new BoardResponse(result));
+
+    return new BoardResponse( await this.broker.fetchOrderBook( 'BTC/JPY') );
+*/
+let result = await this.broker.fetchOrderBook( 'BTC/JPY');
+//console.log(new BoardResponse(result));
+console.log(new BoardResponse(result));
+
+var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
+var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
+
+console.log( new BoardResponse( {bids:bids, asks:asks } ));
+const path = '/v1/board';
+console.log( new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false)));
+//console.log( result.mid_price );
+
+return new BoardResponse( { bids:bids, asks:asks } );
+
+/*
+const path = '/v1/board';
+
+    console.log( new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false)));
     return new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false));
+    */
   }
 
   private async call<R>(path: string, method: string, body: string = ''): Promise<R> {
