@@ -55,43 +55,19 @@ export default class BrokerApi {
   async getBalance(): Promise<BalanceResponse> {
     let balance = await this.broker.fetchBalance ()
     //console.log(balance);
-
- return balance.info.map(x => new Balance(x));
- 
-
-
-//    const path = '/v1/me/getbalance';
-//    const response = await this.get<BalanceResponse>(path);
- //   return response.map(x => new Balance(x));
+    return balance.info.map(x => new Balance(x));
   }
 
+  // 非同期処理もっと工夫したいがMockなので
   async getBoard(): Promise<BoardResponse> {
-/*
     let result = await this.broker.fetchOrderBook( 'BTC/JPY');
- console.log(new BoardResponse(result));
+    //console.log(new BoardResponse(result));
+    var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
+    var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
 
-    return new BoardResponse( await this.broker.fetchOrderBook( 'BTC/JPY') );
-*/
-let result = await this.broker.fetchOrderBook( 'BTC/JPY');
-//console.log(new BoardResponse(result));
-console.log(new BoardResponse(result));
+    //console.log( new BoardResponse( {bids:bids, asks:asks } ));
+    return new BoardResponse( { bids:bids, asks:asks } );
 
-var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
-var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
-
-console.log( new BoardResponse( {bids:bids, asks:asks } ));
-const path = '/v1/board';
-console.log( new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false)));
-//console.log( result.mid_price );
-
-return new BoardResponse( { bids:bids, asks:asks } );
-
-/*
-const path = '/v1/board';
-
-    console.log( new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false)));
-    return new BoardResponse(await this.webClient.fetch<BoardResponse>(path, undefined, false));
-    */
   }
 
   private async call<R>(path: string, method: string, body: string = ''): Promise<R> {
