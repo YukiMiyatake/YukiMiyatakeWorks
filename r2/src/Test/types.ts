@@ -15,6 +15,15 @@ export class BoardResponse extends Castable {
   asks: PriceSizePair[];
 }
 
+export class CcxtSendChildOrderRequest extends Castable{
+  @cast symbol: string;
+  @cast type: string;
+  @cast side: string;
+  @cast amount: number;
+  @cast price?: number;
+  @cast params?: any;
+}
+
 export interface SendChildOrderRequest {
   product_code: string;
   child_order_type: string;

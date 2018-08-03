@@ -1,6 +1,7 @@
 import { hmac, nonce, safeQueryStringStringify } from '../util';
 import WebClient from '../WebClient';
 import {
+  CcxtSendChildOrderRequest,
   SendChildOrderRequest,
   SendChildOrderResponse,
   CancelChildOrderRequest,
@@ -31,8 +32,16 @@ export default class BrokerApi {
   }
 
   async sendChildOrder(request: SendChildOrderRequest): Promise<SendChildOrderResponse> {
-    const path = '/v1/me/sendchildorder';
-    return new SendChildOrderResponse(await this.post<SendChildOrderResponse, SendChildOrderRequest>(path, request));
+    var req = await new CcxtSendChildOrderRequest({
+      symbol: "BTC/JPY",
+      type: "limit",
+      side: request.side,
+      amount: request.size,
+      price: request.price
+//      params?: any     
+    });
+
+    return new SendChildOrderResponse( {child_order_acceptance_id: this.broker.createOrder(req).id });
   }
 
   async cancelChildOrder(request: CancelChildOrderRequest): Promise<CancelChildOrderResponse> {
