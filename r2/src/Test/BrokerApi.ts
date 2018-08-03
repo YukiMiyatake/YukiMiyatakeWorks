@@ -1,5 +1,3 @@
-import { hmac, nonce, safeQueryStringStringify } from '../util';
-import WebClient from '../WebClient';
 import {
   CcxtSendChildOrderRequest,
   SendChildOrderRequest,
@@ -20,8 +18,6 @@ import {
 import * as ccxt from 'ccxt';
 
 export default class BrokerApi {
-  private readonly baseUrl = 'https://api.bitflyer.jp';
-  private readonly webClient: WebClient = new WebClient(this.baseUrl);
   private broker;
 
   constructor(private readonly key: string, private readonly secret: string) {
@@ -31,6 +27,7 @@ export default class BrokerApi {
     })
   }
 
+  // no test
   async sendChildOrder(request: SendChildOrderRequest): Promise<SendChildOrderResponse> {
     var req = await new CcxtSendChildOrderRequest({
       symbol: "BTC/JPY",
@@ -44,17 +41,19 @@ export default class BrokerApi {
     return new SendChildOrderResponse( {child_order_acceptance_id: this.broker.createOrder(req).id });
   }
 
+  // no test
   async cancelChildOrder(request: CancelChildOrderRequest): Promise<CancelChildOrderResponse> {
-    const path = '/v1/me/cancelchildorder';
-    return await this.post<CancelChildOrderResponse, CancelChildOrderRequest>(path, request);
+    return await this.broker.cancelOrder({id: request.child_order_acceptance_id, symbol: 'BTC/JPY' });
   }
 
+  // no test
   async getChildOrders(param: ChildOrdersParam): Promise<ChildOrdersResponse> {
-    const path = '/v1/me/getchildorders';
-    const response = await this.get<ChildOrdersResponse, ChildOrdersParam>(path, param);
-    return response.map(x => new ChildOrder(x));
+    return await this.broker.fetchOrders({symbol: 'BTC/JPY', limit:50 }).map(x =>{      
+      new ChildOrder(x.info);
+    });
   }
 
+  // no test
   async getExecutions(param: ExecutionsParam): Promise<ExecutionsResponse> {
     var result = await this.broker.fetchTrades('BTC/JPY', 30);
 
@@ -88,33 +87,4 @@ export default class BrokerApi {
 
   }
 
-  private async call<R>(path: string, method: string, body: string = ''): Promise<R> {
-    const n = nonce();
-    const message = n + method + path + body;
-    const sign = hmac(this.secret, message);
-    const headers = {
-      'Content-Type': 'application/json',
-      'ACCESS-KEY': this.key,
-      'ACCESS-TIMESTAMP': n,
-      'ACCESS-SIGN': sign
-    };
-    const init = { method, headers, body };
-    return await this.webClient.fetch<R>(path, init);
-  }
-
-  private async post<R, T>(path: string, requestBody: T): Promise<R> {
-    const method = 'POST';
-    const body = JSON.stringify(requestBody);
-    return await this.call<R>(path, method, body);
-  }
-
-  private async get<R, T = never>(path: string, requestParam?: T): Promise<R> {
-    const method = 'GET';
-    let pathWithParam = path;
-    if (requestParam) {
-      const param = safeQueryStringStringify(requestParam);
-      pathWithParam += `?${param}`;
-    }
-    return await this.call<R>(pathWithParam, method);
-  }
 }
