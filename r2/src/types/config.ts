@@ -90,6 +90,8 @@ export class ConfigRoot extends Castable {
   @cast language: string;
   @cast demoMode: boolean;
   @cast symbol: string;
+  @cast symbolTo: string;
+  @cast symbolFrom: string;
   @cast priceMergeSize: number;
   @cast maxSize: number;
   @cast minSize: number;

@@ -18,6 +18,8 @@ export default class BrokerAdapterRouter {
     @inject(symbols.ConfigStore) private readonly configStore: ConfigStore,
     private readonly orderService: OrderService
   ) {
+    //
+    configStore['a']="aa";
     this.brokerAdapterMap = _.keyBy(brokerAdapters, x => x.broker);
   }
 
