@@ -16,6 +16,9 @@ import {
   Balance
 } from './types';
 import * as ccxt from 'ccxt';
+import symbols from '../symbols';
+import {  ConfigStore } from '../types';
+
 
 export default class BrokerApi {
   private broker;
@@ -30,7 +33,7 @@ export default class BrokerApi {
   // no test
   async sendChildOrder(request: SendChildOrderRequest): Promise<SendChildOrderResponse> {
     var req = await new CcxtSendChildOrderRequest({
-      symbol: "BTC/JPY",
+      symbol: "BTC/JPY" + (<ConfigStore>symbols.ConfigStore).config.symbolTo,
       type: "limit",
       side: request.side,
       amount: request.size,
