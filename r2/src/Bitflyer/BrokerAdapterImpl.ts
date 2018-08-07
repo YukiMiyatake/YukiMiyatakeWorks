@@ -16,8 +16,14 @@ import * as _ from 'lodash';
 import BrokerApi from './BrokerApi';
 import { ChildOrdersParam, SendChildOrderRequest, ChildOrder, BoardResponse } from './types';
 import { eRound, toExecution } from '../util';
+/*
+import { ConfigStore } from '../types';
+import symbols from '../symbols';
+import { injectable, multiInject, inject } from 'inversify';
+*/
 
 export default class BrokerAdapterImpl implements BrokerAdapter {
+//  @inject(symbols.ConfigStore) private readonly configStore: ConfigStore,
   private readonly brokerApi: BrokerApi;
   private readonly log = getLogger('Bitflyer.BrokerAdapter');
   readonly broker = 'Bitflyer';
@@ -63,7 +69,8 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
   }
 
   async cancel(order: Order): Promise<void> {
-    let productCode = '';
+    const productCode = order.symbol.replace('/','_');
+/*
     switch (order.symbol) {
       case 'BTC/JPY':
         productCode = 'BTC_JPY';
@@ -71,6 +78,7 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
       default:
         throw new Error('Not implemented.');
     }
+    */
     const request = { product_code: productCode, child_order_acceptance_id: order.brokerOrderId };
     await this.brokerApi.cancelChildOrder(request);
     order.lastUpdated = new Date();
@@ -96,6 +104,8 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
       throw new Error('Not implemented.');
     }
 
+    const productCode = order.symbol.replace('/','_');
+    /*
     let productCode = '';
     switch (order.symbol) {
       case 'BTC/JPY':
@@ -104,7 +114,7 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
       default:
         throw new Error('Not implemented.');
     }
-
+*/
     let price = 0;
     let childOrderType = '';
     switch (order.type) {

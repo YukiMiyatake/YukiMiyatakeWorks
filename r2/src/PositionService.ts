@@ -41,7 +41,8 @@ export default class PositionService extends EventEmitter {
   }
 
   print(): void {
-    const { baseCcy } = splitSymbol(this.configStore.config.symbol);
+    //    const { baseCcy } = splitSymbol(this.configStore.config.symbol);
+    const baseCcy  = this.configStore.config.symbolFrom;
     const isOk = b => (b ? 'OK' : 'NG');
     const formatBrokerPosition = (brokerPosition: BrokerPosition) =>
       `${padEnd(brokerPosition.broker, 10)}: ${padStart(_.round(brokerPosition.baseCcyPosition, 3), 6)} ${baseCcy}, ` +
@@ -93,7 +94,8 @@ export default class PositionService extends EventEmitter {
   }
 
   private async getBrokerPosition(brokerConfig: BrokerConfig, minSize: number): Promise<BrokerPosition> {
-    const { baseCcy } = splitSymbol(this.configStore.config.symbol);
+//    const { baseCcy } = splitSymbol(this.configStore.config.symbol);
+    const baseCcy = this.configStore.config.symbolFrom;
     const positions = await this.brokerAdapterRouter.getPositions(brokerConfig.broker);
     const baseCcyPosition = positions.get(baseCcy);
     if (baseCcyPosition === undefined) {

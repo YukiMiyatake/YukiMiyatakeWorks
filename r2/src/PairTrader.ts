@@ -110,7 +110,7 @@ export default class PairTrader extends EventEmitter {
      ? _.round(quote.price * (1 - config.acceptablePriceRange/100)) as number
      : quote.price;
     const order = new OrderImpl({
-      symbol: this.configStore.config.symbol,
+      symbol: this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo,
       broker: quote.broker,
       side: orderSide,
       size: targetVolume,

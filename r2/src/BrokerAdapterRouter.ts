@@ -18,8 +18,6 @@ export default class BrokerAdapterRouter {
     @inject(symbols.ConfigStore) private readonly configStore: ConfigStore,
     private readonly orderService: OrderService
   ) {
-    //
-    configStore['a']="aa";
     this.brokerAdapterMap = _.keyBy(brokerAdapters, x => x.broker);
   }
 
@@ -49,9 +47,9 @@ export default class BrokerAdapterRouter {
   async getPositions(broker: Broker): Promise<Map<string, number>> {
     try {
       // for backword compatibility, use getBtcPosition if getPositions is not defined
-      if (!_.isFunction(this.brokerAdapterMap[broker].getPositions) && this.configStore.config.symbol === 'BTC/JPY') {
+      if (!_.isFunction(this.brokerAdapterMap[broker].getPositions) ) {
         const btcPosition = await this.brokerAdapterMap[broker].getBtcPosition();
-        return new Map<string, number>([['BTC', btcPosition]]);
+        return new Map<string, number>([[this.configStore.config.symbolFrom, btcPosition]]);
       }
       if (this.brokerAdapterMap[broker].getPositions !== undefined) {
         return await (this.brokerAdapterMap[broker].getPositions as () => Promise<Map<string, number>>)();

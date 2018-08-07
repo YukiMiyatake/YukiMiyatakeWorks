@@ -21,7 +21,7 @@ export default class SingleLegHandler {
     @inject(symbols.ConfigStore) configStore: ConfigStore
   ) {
     this.onSingleLegConfig = configStore.config.onSingleLeg;
-    this.symbol = configStore.config.symbol;
+    this.symbol = configStore.config.symbolFrom + '/' + configStore.config.symbolFrom;
   }
 
   async handle(orders: OrderPair, closable: boolean): Promise<OrderImpl[]> {
