@@ -16,6 +16,10 @@ import * as _ from 'lodash';
 import BrokerApi from './BrokerApi';
 import { ChildOrdersParam, SendChildOrderRequest, ChildOrder, BoardResponse } from './types';
 import { eRound, toExecution } from '../util';
+import symbols from '../symbols';
+import {  ConfigStore } from '../types';
+import container from '../container.config';
+
 /*
 import { ConfigStore } from '../types';
 import symbols from '../symbols';
@@ -27,9 +31,12 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
   private readonly brokerApi: BrokerApi;
   private readonly log = getLogger('Bitflyer.BrokerAdapter');
   readonly broker = 'Bitflyer';
+  private configStore: ConfigStore;
 
   constructor(private readonly config: BrokerConfigType) {
     this.brokerApi = new BrokerApi(this.config.key, this.config.secret);
+    this.configStore = container.get<ConfigStore>(symbols.ConfigStore);
+
   }
 
   async send(order: Order): Promise<void> {
@@ -70,15 +77,6 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
 
   async cancel(order: Order): Promise<void> {
     const productCode = order.symbol.replace('/','_');
-/*
-    switch (order.symbol) {
-      case 'BTC/JPY':
-        productCode = 'BTC_JPY';
-        break;
-      default:
-        throw new Error('Not implemented.');
-    }
-    */
     const request = { product_code: productCode, child_order_acceptance_id: order.brokerOrderId };
     await this.brokerApi.cancelChildOrder(request);
     order.lastUpdated = new Date();
@@ -87,7 +85,7 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
 
   async getBtcPosition(): Promise<number> {
     const balanceResponse = await this.brokerApi.getBalance();
-    const btcBalance = _.find(balanceResponse, b => b.currency_code === 'BTC');
+    const btcBalance = _.find(balanceResponse, b => b.currency_code === this.configStore.config.symbolFrom);
     if (!btcBalance) {
       throw new Error('Btc balance is not found.');
     }
@@ -105,16 +103,6 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
     }
 
     const productCode = order.symbol.replace('/','_');
-    /*
-    let productCode = '';
-    switch (order.symbol) {
-      case 'BTC/JPY':
-        productCode = 'BTC_JPY';
-        break;
-      default:
-        throw new Error('Not implemented.');
-    }
-*/
     let price = 0;
     let childOrderType = '';
     switch (order.type) {
