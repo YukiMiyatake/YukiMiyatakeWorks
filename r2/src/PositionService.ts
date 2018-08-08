@@ -3,7 +3,7 @@ import { ConfigStore, BrokerConfig, BrokerMap, BrokerPosition } from './types';
 import { getLogger } from '@bitr/logger';
 import * as _ from 'lodash';
 import Decimal from 'decimal.js';
-import { hr, eRound, splitSymbol, padEnd, padStart } from './util';
+import { hr, eRound, padEnd, padStart } from './util';
 import symbols from './symbols';
 import BrokerAdapterRouter from './BrokerAdapterRouter';
 import BrokerStabilityTracker from './BrokerStabilityTracker';

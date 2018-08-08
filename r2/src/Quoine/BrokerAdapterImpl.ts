@@ -73,7 +73,62 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
       case 'BTC/JPY':
         productId = '5';
         break;
-      default:
+
+
+        case 'BTC/USD':
+        productId = '1';
+        break;
+
+        case 'BTC/EUR':
+        productId = '3';
+        break;
+
+        case 'BTC/SGD':
+        productId = '7';
+        break;
+
+        case 'BTC/HKD':
+        productId = '9';
+        break;
+
+        case 'BTC/IDR':
+        productId = '11';
+        break;
+
+        case 'BTC/AUD':
+        productId = '13';
+        break;
+
+        case 'BTC/PHP':
+        productId = '15';
+        break;
+
+        case 'BTC/CNY':
+        productId = '17';
+        break;
+
+        case 'BTC/INR':
+        productId = '18';
+        break;
+
+        case 'ETH/USD':
+        productId = '27';
+        break;
+
+        case 'ETH/EUR':
+        productId = '28';
+        break;
+
+        case 'ETH/JPY':
+        productId = '29';
+        break;
+
+        case 'ETH/SGD':
+        productId = '30';
+        break;
+
+
+        default:
         throw new Error('Not implemented.');
     }
 

@@ -18,22 +18,29 @@ import {
 import * as ccxt from 'ccxt';
 import symbols from '../symbols';
 import {  ConfigStore } from '../types';
+import container from '../container.config';
 
 
 export default class BrokerApi {
   private broker;
+  private configStore: ConfigStore;
 
-  constructor(private readonly key: string, private readonly secret: string) {
+  constructor(
+    private readonly key: string
+    , private readonly secret: string
+
+  ) {
     this.broker = new ccxt.bitflyer({ 
       'apiKey': this.key, 
       'secret': this.secret
     })
+    this.configStore = container.get<ConfigStore>(symbols.ConfigStore);
   }
 
   // no test
   async sendChildOrder(request: SendChildOrderRequest): Promise<SendChildOrderResponse> {
     var req = await new CcxtSendChildOrderRequest({
-      symbol: "BTC/JPY" + (<ConfigStore>symbols.ConfigStore).config.symbolTo,
+      symbol: this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo,
       type: "limit",
       side: request.side,
       amount: request.size,
@@ -46,19 +53,19 @@ export default class BrokerApi {
 
   // no test
   async cancelChildOrder(request: CancelChildOrderRequest): Promise<CancelChildOrderResponse> {
-    return await this.broker.cancelOrder({id: request.child_order_acceptance_id, symbol: 'BTC/JPY' });
+    return await this.broker.cancelOrder({id: request.child_order_acceptance_id, symbol: this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo });
   }
 
   // no test
   async getChildOrders(param: ChildOrdersParam): Promise<ChildOrdersResponse> {
-    return await this.broker.fetchOrders({symbol: 'BTC/JPY', limit:50 }).map(x =>{      
+    return await this.broker.fetchOrders({symbol: this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo, limit:50 }).map(x =>{      
       new ChildOrder(x.info);
     });
   }
 
   // no test
   async getExecutions(param: ExecutionsParam): Promise<ExecutionsResponse> {
-    var result = await this.broker.fetchTrades('BTC/JPY', 30);
+    var result = await this.broker.fetchTrades(this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo, 30);
 
     return (result.map(x => {
       new Execution({
