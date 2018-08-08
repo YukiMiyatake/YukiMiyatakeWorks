@@ -15,11 +15,13 @@ export default class SingleLegHandler {
   private readonly log = getLogger(this.constructor.name);
   private readonly onSingleLegConfig: OnSingleLegConfig;
   private symbol: string;
+  private configStore: ConfigStore;
 
   constructor(
     private readonly brokerAdapterRouter: BrokerAdapterRouter,
     @inject(symbols.ConfigStore) configStore: ConfigStore
   ) {
+    this.configStore = configStore;
     this.onSingleLegConfig = configStore.config.onSingleLeg;
     this.symbol = configStore.config.symbolFrom + '/' + configStore.config.symbolFrom;
   }
@@ -49,7 +51,7 @@ export default class SingleLegHandler {
     const sign = largeLeg.side === OrderSide.Buy ? -1 : 1;
     const price = _.round(largeLeg.price * (1 + sign * options.limitMovePercent / 100));
     const size = _.floor(largeLeg.filledSize - smallLeg.filledSize, LOT_MIN_DECIMAL_PLACE);
-    const { baseCcy } = splitSymbol(this.symbol);
+    const baseCcy = this.configStore.config.symbolFrom ;
     this.log.info(t`ReverseFilledLeg`, OrderUtil.toShortString(largeLeg), price.toLocaleString(), size, baseCcy);
     const reversalOrder = new OrderImpl({
       symbol: this.symbol,
