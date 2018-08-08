@@ -90,7 +90,7 @@ export default class BrokerApi {
     var result = await this.broker.fetchOrderBook( 'BTC/JPY');
     //console.log(new BoardResponse(result));
     var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
-    var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
+    var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo] }) );
 
     //console.log( new BoardResponse( {bids:bids, asks:asks } ));
     return new BoardResponse( { bids:bids, asks:asks } );

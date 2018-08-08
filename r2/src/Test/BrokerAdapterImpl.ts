@@ -16,15 +16,20 @@ import * as _ from 'lodash';
 import BrokerApi from './BrokerApi';
 import { ChildOrdersParam, SendChildOrderRequest, ChildOrder, BoardResponse } from './types';
 import { eRound, toExecution } from '../util';
+import symbols from '../symbols';
+import {  ConfigStore } from '../types';
+import container from '../container.config';
 
 
 export default class BrokerAdapterImpl implements BrokerAdapter {
   private readonly brokerApi: BrokerApi;
   private readonly log = getLogger('Test.BrokerAdapter');
+  private configStore: ConfigStore;
   readonly broker = 'Test';
 
   constructor(private readonly config: BrokerConfigType) {
     this.brokerApi = new BrokerApi(this.config.key, this.config.secret);
+    this.configStore = container.get<ConfigStore>(symbols.ConfigStore);
   }
 
   async send(order: Order): Promise<void> {
@@ -74,7 +79,7 @@ export default class BrokerAdapterImpl implements BrokerAdapter {
 
   async getBtcPosition(): Promise<number> {
     const balanceResponse = await this.brokerApi.getBalance();
-    const btcBalance = _.find(balanceResponse, b => b.currency_code === 'BTC');
+    const btcBalance = _.find(balanceResponse, b => b.currency_code === this.configStore.config.symbolFrom );
     if (!btcBalance) {
       throw new Error('Btc balance is not found.');
     }
