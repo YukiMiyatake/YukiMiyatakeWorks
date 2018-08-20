@@ -48,7 +48,8 @@ describe('Arbitrager', () => {
     aee.stop = jest.fn();
     quoteAggregator = aee as QuoteAggregator;
     config = {
-      symbol: 'BTC/JPY',
+      symbolFrom: 'BTC',
+      symbolTo: 'JPY',
       maxNetExposure: 10.0,
       minSize: 0.005,
       brokers: [
