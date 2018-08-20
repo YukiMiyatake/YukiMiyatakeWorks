@@ -1,6 +1,9 @@
 import { CashMarginTypeStrategy } from './types';
 import BrokerApi from './BrokerApi';
 import { Order, OrderStatus, OrderSide, OrderType, CashMarginType } from '../types';
+import symbols from '../symbols';
+import {  ConfigStore } from '../types';
+import container from '../container.config';
 
 export default class CashStrategy implements CashMarginTypeStrategy {
   constructor(private readonly brokerApi: BrokerApi) {}
@@ -9,8 +12,9 @@ export default class CashStrategy implements CashMarginTypeStrategy {
     if (order.cashMarginType !== CashMarginType.Cash) {
       throw new Error();
     }
+    const configStore = container.get<ConfigStore>(symbols.ConfigStore);
     const request = {
-      pair: 'btc_jpy',
+      pair:  configStore.config.symbolFrom.toLowerCase() + '_' +  configStore.config.symbolTo.toLowerCase(),
       order_type: this.getBrokerOrderType(order),
       amount: order.size,
       rate: order.price

@@ -87,10 +87,10 @@ export default class BrokerApi {
 
   // 非同期処理もっと工夫したいがMockなので
   async getBoard(): Promise<BoardResponse> {
-    var result = await this.broker.fetchOrderBook( 'BTC/JPY');
+    var result = await this.broker.fetchOrderBook( this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo);
     //console.log(new BoardResponse(result));
     var bids = result.bids.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
-    var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[this.configStore.config.symbolFrom + '/' +  this.configStore.config.symbolTo] }) );
+    var asks = result.asks.map(x => new PriceSizePair( {price: x[0], size: x[1] }) );
 
     //console.log( new BoardResponse( {bids:bids, asks:asks } ));
     return new BoardResponse( { bids:bids, asks:asks } );
