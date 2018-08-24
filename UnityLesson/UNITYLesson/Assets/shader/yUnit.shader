@@ -57,7 +57,7 @@
 					return o;
 				}
 
-				float3 frag(v2f i) : SV_Target
+				float4 frag(v2f i) : SV_Target
 				{
 					float3 L = normalize(_WorldSpaceLightPos0.xyz);
 					float3 V = normalize(_WorldSpaceCameraPos - i.vertexW.xyz);
@@ -83,7 +83,7 @@
 					float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) * _Spec1Color.xyz * lightCol;  // Half vector
 
 
-					return (ambient + diffuse) * tex + specular;
+					return float4( (ambient + diffuse) * tex + specular, 1.0);
 				}
 				ENDCG
 			}
@@ -136,7 +136,7 @@
 					return o;
 				}
 
-				float3 frag(v2f i) : SV_Target
+				float4 frag(v2f i) : SV_Target
 				{
 					float3 L = normalize(_WorldSpaceLightPos0.xyz);
 					float3 V = normalize(_WorldSpaceCameraPos - i.vertexW.xyz);
@@ -159,7 +159,7 @@
 					float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) *  _Spec1Color.xyz * lightCol;  // Half vector
 
 
-					return diffuse * tex + specular;
+					return float4( diffuse * tex + specular, 1.0 );
 				}
 					ENDCG
 				}
