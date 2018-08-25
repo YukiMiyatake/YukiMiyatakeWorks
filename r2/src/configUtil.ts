@@ -19,7 +19,8 @@ export function getConfigRoot(): ConfigRoot {
 }
 
 export function getConfigPath(): string {
-  return process.env.NODE_ENV !== 'test' ? `${process.cwd()}/config.json` : `${__dirname}/__tests__/config_test.json`;
+  const configFile=  process.argv[2] || "config.json";
+  return process.env.NODE_ENV !== 'test' ? `${process.cwd()}/${configFile}}` : `${__dirname}/__tests__/${configFile}`;
 }
 
 export function findBrokerConfig(configRoot: ConfigRoot, broker: Broker): BrokerConfig {
