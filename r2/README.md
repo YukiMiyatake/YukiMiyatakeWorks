@@ -1,3 +1,51 @@
+#大きな追加事項
+
+##ccxt関連
+現在 ccxtを使った取引所の追加も出来るようにしている
+設定不方法は、src/Testを参考に。  Testフォルダを同じ階層にコピーし  
+
+
+``` BrokerAdapterImpl.ts
+  private readonly log = getLogger('Test.BrokerAdapter');
+  private configStore: ConfigStore;
+  readonly broker = 'Test';
+```
+
+のTestを取引所名に変更し  
+
+``` BrokerApi.ts
+    this.broker = new ccxt.bitflyer({ 
+      'apiKey': this.key, 
+      'secret': this.secret
+    })
+
+```
+
+の bitflyerを適切な取引所に変更  
+  
+そして、config.jsonに、取引所の設定を追加すれば基本的には動く予定である  
+  
+場合によっては APIに取引所ごとの追加パラメータが必要になる  
+
+
+##通貨ペア対応
+BTC/JPY以外の通貨ペアの取引が出来るよう設定ファイルに SymbolFrom、SymbolTo　を追加  
+ただし、1つのサーバでは1つのペアしか現状取り扱わないので、複数通貨ペア取引を行うには 複数サーバの立ち上げを行う  
+  
+##起動
+起動オプションに 設定ファイル名を追加(ToDO)
+
+
+
+##注意点
+板情報はテストしているが、オーダー出す部分はあまりテスト出来ていない  
+  
+View部分は表示がなおってない物が多い（BTC/JPYで固定されている）  
+
+外部依存しているモジュールが存在するが、多分ないが　悪意のある変更されると怖いので、そのあたりForkするなどして ロックしておきたい
+
+
+
 [日本語はこちら](http://qiita.com/bitrinjani/items/3ed756da9baf7d171306)
 
 [![Build Status](https://travis-ci.org/bitrinjani/r2.svg?branch=master)](https://travis-ci.org/bitrinjani/r2) [![Coverage Status](https://coveralls.io/repos/github/bitrinjani/r2/badge.svg?branch=master&i=5)](https://coveralls.io/github/bitrinjani/r2?branch=master)
