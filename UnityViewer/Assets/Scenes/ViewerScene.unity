@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 282840811}
   - component: {fileID: 282840812}
   - component: {fileID: 282840815}
+  - component: {fileID: 282840816}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -249,7 +250,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
@@ -275,12 +276,31 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d707063233734e9387f0c535d908b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 25a7b6f598a27427e9284d3603dc9eed, type: 2}
+--- !u!114 &282840816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5c931798b034ecfb2fd2ea8723fc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  kernelSize: 0
+  interpolation: 1
+  downsample: 1
+  iterations: 1
+  gammaCorrection: 1
+  blurMaterial: {fileID: 2100000, guid: cf973ee30cc5247098ec5463213c896a, type: 2}
+  UIMaterial: {fileID: 2100000, guid: 2eb27b6f2b5d144d786b6e9db1720a45, type: 2}
 --- !u!1001 &779377208
 Prefab:
   m_ObjectHideFlags: 0
