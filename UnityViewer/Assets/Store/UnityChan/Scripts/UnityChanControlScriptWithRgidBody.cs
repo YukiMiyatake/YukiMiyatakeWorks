@@ -162,7 +162,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		// IDLE中の処理
 		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState)
+        else if (currentBaseState.fullPathHash == idleState)
 		{
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
@@ -175,7 +175,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState)
+        else if (currentBaseState.fullPathHash == restState)
 		{
 			//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
 			// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
