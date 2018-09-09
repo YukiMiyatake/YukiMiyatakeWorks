@@ -162,6 +162,51 @@
 					return float4( diffuse * tex + specular, 1.0 );
 				}
 					ENDCG
-				}
+
+                }
+
+        // ------------------------------------------------------------------
+        //  Shadow rendering pass
+        Pass {
+            Name "ShadowCaster"
+            Tags { "LightMode" = "ShadowCaster" }
+
+            ZWrite On ZTest LEqual
+
+            CGPROGRAM
+            #pragma target 3.0
+
+  
+            #pragma vertex vertShadowCaster
+            #pragma fragment fragShadowCaster
+
+
+            struct VertexInput {
+                float4 vertex : POSITION;
+            };
+            struct VertexOutput {
+                float4 pos : SV_POSITION ;
+            };
+
+            VertexOutput vertShadowCaster (VertexInput v) {
+
+                VertexOutput o = (VertexOutput)0;
+                o.pos = UnityObjectToClipPos( v.vertex );
+                return o;
+            }
+
+            float4 fragShadowCaster(VertexOutput i) : SV_TARGET {
+                return 0;
+            }
+
+
+            ENDCG
+
+
+
+        }
+
 		}
+
+
 }

@@ -42,6 +42,7 @@
 #endif
             };
             VertexOutput vert (VertexInput v) {
+
                 VertexOutput o = (VertexOutput)0;
 #ifdef _IS_CLIPPING_MODE
 //_Clipping
@@ -57,6 +58,7 @@
                 return o;
             }
             float4 frag(VertexOutput i) : SV_TARGET {
+
 #ifdef _IS_CLIPPING_MODE
 //_Clipping
                 float2 Set_UV0 = i.uv0;
@@ -76,5 +78,12 @@
 #elif _IS_CLIPPING_OFF
 //Default
 #endif
-                SHADOW_CASTER_FRAGMENT(i)
+
+/*
+// UNITY_OUTPUT_DEPTH(i.hpos.zw);
+//float2 hoge = i.hpos.zw;
+// return hoge.x/hoge.y;
+return   1;
+*/
+               SHADOW_CASTER_FRAGMENT(i)
             }
