@@ -45,8 +45,7 @@
 			uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
 			uniform float _Spec1Power;
 			uniform float4 _Spec1Color;
-
-
+            
 			v2f vert(appdata_full v){
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
@@ -88,6 +87,7 @@
 //                    return SHADOW_ATTENUATION(i);
 			//	return float4( (diffuse) * tex + specular, 1.0);
                 return float4( (ambient + diffuse) * tex + specular, 1.0);
+               // return float4( SHADOW_ATTENUATION(i), 1,1,1);
 			}
 			ENDCG
 		}
