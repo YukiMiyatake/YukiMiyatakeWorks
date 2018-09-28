@@ -3,6 +3,9 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+        _ShadowPower ("ShadowPower", Range(0.0, 1.0)) = 0.5
+        _ShadowTex ("ShadowTexture", 2D) = "white" {}
+        _ShadowTexPower ("ShadowTexPower", Range(0.0, 1.0)) = 0.5
 		_Spec1Power("Specular Power", Range(0, 30)) = 1
 		_Spec1Color("Specular Color", Color) = (0.5,0.5,0.5,1)
 	}
@@ -42,10 +45,24 @@
                 SHADOW_COORDS(3)
 			};
 
-			uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
+
+            struct v2f_in
+            {
+                float4 vpos : VPOS;
+                float4 vertexW: TEXCOORD0;
+                float2 uv     : TEXCOORD1;
+                float3 normalWorld : TEXCOORD2;
+                SHADOW_COORDS(3)
+            };
+
+            uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
+            uniform sampler2D _ShadowTex; uniform float4 _ShadowTex_ST;
+            uniform float _ShadowPower;
+            uniform float _ShadowTexPower;
 			uniform float _Spec1Power;
 			uniform float4 _Spec1Color;
-            
+
+
 			v2f vert(appdata_full v){
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
@@ -61,7 +78,7 @@
 				return o;
 			}
 
-			float4 frag(v2f i) : SV_Target{
+			float4 frag(v2f_in i) : SV_Target{
 				float3 L = normalize(_WorldSpaceLightPos0.xyz);
 				float3 V = normalize(_WorldSpaceCameraPos - i.vertexW.xyz);
 				float3 N = i.normalWorld;
@@ -69,7 +86,7 @@
 
 
 				//LightColor
-				float3 lightCol = _LightColor0.rgb * LIGHT_ATTENUATION(i);
+				float3 lightCol = _LightColor0.rgb * lerp( (1-_ShadowPower), 1.0,  LIGHT_ATTENUATION(i));
 
 				//Ambient
 				float3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;
@@ -83,11 +100,10 @@
 				// Speculer
 			//	float3 specular = pow(max(0.0, dot(reflect(-L, N), V)), _Spec1Power) * _Spec1Color.xyz;  // reflection
 				float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) * _Spec1Color.xyz * lightCol;  // Half vector
-
-//                    return SHADOW_ATTENUATION(i);
-			//	return float4( (diffuse) * tex + specular, 1.0);
-                return float4( (ambient + diffuse) * tex + specular, 1.0);
-               // return float4( SHADOW_ATTENUATION(i), 1,1,1);
+                            
+                i.vpos.xy /= _ScreenParams.xy;
+                float3 shadowTex = tex2D(_ShadowTex, i.vpos.xy) * lerp( _ShadowTexPower, 0.0,  SHADOW_ATTENUATION(i));
+                return float4( (ambient + diffuse) * tex * (1-shadowTex) + specular, 1.0);
 			}
 			ENDCG
 		}
