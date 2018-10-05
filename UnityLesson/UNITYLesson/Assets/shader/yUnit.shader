@@ -48,7 +48,7 @@
 
             struct v2f_in
             {
-                float4 vpos : VPOS;
+                UNITY_VPOS_TYPE vpos : VPOS;
                 float4 vertexW: TEXCOORD0;
                 float2 uv     : TEXCOORD1;
                 float3 normalWorld : TEXCOORD2;
@@ -102,8 +102,8 @@
 				float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) * _Spec1Color.xyz * lightCol;  // Half vector
                             
                 i.vpos.xy /= _ScreenParams.xy;
-                float3 shadowTex = tex2D(_ShadowTex, i.vpos.xy) * lerp( _ShadowTexPower, 0.0,  SHADOW_ATTENUATION(i));
-                return float4( (ambient + diffuse) * tex * (1-shadowTex) + specular, 1.0);
+                float3 shadowTex = tex2D(_ShadowTex, i.vpos.xy) * lerp( _ShadowTexPower, 0.0,  ( SHADOW_ATTENUATION(i) *( diffuse*2)) );
+                return float4( saturate((ambient + diffuse) * tex * (1-shadowTex) + specular), 1.0);
 			}
 			ENDCG
 		}
