@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Naka_hair_c
-  m_Shader: {fileID: 4800000, guid: 514b1f3df872b2b4896b024f61b92648, type: 3}
+  m_Shader: {fileID: 4800000, guid: e50ce2d94441a374294364fb26b6a426, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,6 +54,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: 489963bbb3fcb5d4fbcce3582cab4b83, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ShadowTex:
         m_Texture: {fileID: 2800000, guid: ac4fb0b8f3bda46a495545076a5d57ee, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -70,6 +74,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RampPower: 0.147
     - _ShadowPower: 0.49
     - _ShadowStencilRef: 1
     - _ShadowTexPower: 0.51
