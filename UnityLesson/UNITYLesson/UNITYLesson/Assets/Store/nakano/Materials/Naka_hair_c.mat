@@ -73,18 +73,23 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0.001
     - _Parallax: 0.02
-    - _RampPower: 0.147
+    - _RampPower: 0.201
     - _ShadowPower: 0.49
     - _ShadowStencilRef: 1
-    - _ShadowTexPower: 0.51
+    - _ShadowTexPower: 0
     - _SmoothnessTextureChannel: 0
     - _Spec1Power: 4
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _ToonPower: 0.5
+    - _ToonThreshold: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Spec1Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _ToonColor: {r: 0, g: 0, b: 0, a: 0}
