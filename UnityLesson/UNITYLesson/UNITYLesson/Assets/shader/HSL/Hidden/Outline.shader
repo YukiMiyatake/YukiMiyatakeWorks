@@ -20,11 +20,11 @@ Shader "Hidden/HSL/Outline" {
 
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma multi_compile _ _USE_VERTEX_OUTLINE
+#pragma multi_compile _ _USE_OUTLINE
+#pragma multi_compile _ _USE_VERTEX_OUTLINE
 			#pragma multi_compile _ _USE_CLIP
 
 			#include "UnityCG.cginc"
-
 
 			uniform float _OutlineWidth;
 			uniform float4 _OutlineColor;
@@ -57,9 +57,14 @@ Shader "Hidden/HSL/Outline" {
 			v2f vert(appdata v)
 			{
 				v2f o;
+				UNITY_INITIALIZE_OUTPUT(v2f,o);
+#ifndef _USE_OUTLINE
+				return o;
+#endif
 				//UNITY_INITIALIZE_OUTPUT(v2f,o);
 				float3 norm = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
 				float2 offset = TransformViewToProjection(norm.xy);
+
 
 #ifdef _USE_CLIP
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
@@ -79,6 +84,9 @@ Shader "Hidden/HSL/Outline" {
 
 			fixed4 frag(v2f i) : SV_Target
 			{
+#ifndef _USE_OUTLINE
+				clip(-1);
+#endif
 #ifdef _USE_CLIP
 				float4 tex = tex2D(_MainTex, i.uv);
 				clip(tex.a - _ClipThreshold);
