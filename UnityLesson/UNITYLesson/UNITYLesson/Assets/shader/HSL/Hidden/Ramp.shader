@@ -20,10 +20,12 @@ Shader "Hidden/HSL/Ramp" {
 			#include "UnityCG.cginc"
 			#include "Lighting.cginc"
 			#include "AutoLight.cginc"
+//			#include "Shaders/Include/HSL.cginc"
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile _BLENDMODE_NORMAL _BLENDMODE_MULTIPLY _BLENDMODE_LINEARDODGE _BLENDMODE_SCREEN 
 			#pragma multi_compile _ _USE_NORMALMAP
-		
+			#pragma multi_compile _ _USE_CLIP
+
 
 		//          #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
 			struct appdata
@@ -64,6 +66,7 @@ Shader "Hidden/HSL/Ramp" {
 			uniform sampler2D _NormalMap; uniform float4 _NormalMap_ST;
 
 			uniform sampler2D _RampTex; uniform float4 _RampTex_ST;
+			uniform float _RampV;
 			uniform float _ToonPower;
 			uniform float4 _ToonColor;
 			uniform float _ToonThreshold;
@@ -74,6 +77,9 @@ Shader "Hidden/HSL/Ramp" {
 			uniform float _Spec1Power;
 			uniform float4 _Spec1Color;
 
+#ifdef _USE_CLIP
+			uniform float _ClipThreshold;
+#endif
 
 			v2f vert(appdata_full v) {
 				v2f o;
@@ -91,6 +97,10 @@ Shader "Hidden/HSL/Ramp" {
 			}
 
 			float4 frag(v2f_in i) : SV_Target{
+				float4 tex = tex2D(_MainTex, i.uv);
+#ifdef _USE_CLIP
+				clip(tex.a - _ClipThreshold);
+#endif
 				float3 L = normalize(_WorldSpaceLightPos0.xyz);
 				float3 V = normalize(_WorldSpaceCameraPos - i.vertexW.xyz);
 				float3 H = normalize(L + V);
@@ -106,12 +116,11 @@ Shader "Hidden/HSL/Ramp" {
 
 				//LightColor
 				float3 lightCol = _LightColor0.rgb * lerp((1 - _ShadowPower), 1.0,  LIGHT_ATTENUATION(i));
+//				float3 lightCol = LIGHT_ATTENUATION(i);
 
 				//Ambient
-				float3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;
+			//	float3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;
 
-				// texture albedo
-				float4 tex = tex2D(_MainTex, i.uv);
 
 				// Diffuse(HalfLambert)
 				float3 NdotL = dot(N, L);
@@ -119,7 +128,7 @@ Shader "Hidden/HSL/Ramp" {
 
 
 
-				float3 ramp = tex2D(_RampTex, float2(diffuse.x, 0));
+				float3 ramp = tex2D(_RampTex, float2(diffuse.x, _RampV));
 				float3 ramp2 = (diffuse.x >= _ToonThreshold) ? float3(1.0, 1.0, 1.0) : _ToonColor.xyz;
 
 
@@ -143,7 +152,7 @@ Shader "Hidden/HSL/Ramp" {
 #else
 				albedo = tex*(1 - _ToonPower) + ramp3 * _ToonPower;
 #endif
-				return float4(saturate(ambient* albedo * shadowTex + specular), 1.0);
+				return float4(saturate(/* ambient* */ albedo * shadowTex + specular), 1.0);
 			}
 			ENDCG
 

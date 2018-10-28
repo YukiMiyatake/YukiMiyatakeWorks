@@ -21,6 +21,7 @@ Shader "Hidden/HSL/Outline" {
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile _ _USE_VERTEX_OUTLINE
+			#pragma multi_compile _ _USE_CLIP
 
 			#include "UnityCG.cginc"
 
@@ -28,6 +29,10 @@ Shader "Hidden/HSL/Outline" {
 			uniform float _OutlineWidth;
 			uniform float4 _OutlineColor;
 
+#ifdef _USE_CLIP
+			uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
+			uniform float _ClipThreshold;
+#endif
 
 			struct appdata
 			{
@@ -43,6 +48,9 @@ Shader "Hidden/HSL/Outline" {
 			{
 				float4 pos : SV_POSITION;
 				fixed4 outlineColor : COLOR;
+#ifdef _USE_CLIP
+				float2 uv	  : TEXCOORD;
+#endif
 			};
 
 
@@ -53,14 +61,17 @@ Shader "Hidden/HSL/Outline" {
 				float3 norm = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
 				float2 offset = TransformViewToProjection(norm.xy);
 
+#ifdef _USE_CLIP
+				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+#endif
 
 				o.pos = UnityObjectToClipPos(v.vertex);
 
 #ifdef _USE_VERTEX_OUTLINE
-				o.pos.xy += offset i.outline * _OutlineWidth* 0.001;
+				o.pos.xy += offset * i.outline.a * _OutlineWidth * 0.001;
 				o.outlineColor = _OutlineColor;
 #else
-				o.pos.xy += offset  * _OutlineWidth * 0.001;
+				o.pos.xy += offset * _OutlineWidth * 0.001;
 				o.outlineColor = _OutlineColor;
 #endif
 				return o;
@@ -68,6 +79,11 @@ Shader "Hidden/HSL/Outline" {
 
 			fixed4 frag(v2f i) : SV_Target
 			{
+#ifdef _USE_CLIP
+				float4 tex = tex2D(_MainTex, i.uv);
+				clip(tex.a - _ClipThreshold);
+#endif
+
 				return i.outlineColor;
 			}
 
