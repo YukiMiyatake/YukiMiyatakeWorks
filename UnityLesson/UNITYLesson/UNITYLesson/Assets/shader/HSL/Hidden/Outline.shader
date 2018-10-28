@@ -20,6 +20,7 @@ Shader "Hidden/HSL/Outline" {
 
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma multi_compile _ _USE_VERTEX_OUTLINE
 
 			#include "UnityCG.cginc"
 
@@ -33,6 +34,9 @@ Shader "Hidden/HSL/Outline" {
 				float4 vertex : POSITION;
 				float3 normal : NORMAL;
 				float2 texcoord	  : TEXCOORD0;
+#ifdef _USE_VERTEX_OUTLINE
+				fixed4 outline : COLOR0;
+#endif
 			};
 
 			struct v2f
@@ -51,10 +55,14 @@ Shader "Hidden/HSL/Outline" {
 
 
 				o.pos = UnityObjectToClipPos(v.vertex);
-				o.pos.xy += offset  * _OutlineWidth;
 
+#ifdef _USE_VERTEX_OUTLINE
+				o.pos.xy += offset i.outline * _OutlineWidth* 0.001;
 				o.outlineColor = _OutlineColor;
-
+#else
+				o.pos.xy += offset  * _OutlineWidth * 0.001;
+				o.outlineColor = _OutlineColor;
+#endif
 				return o;
 			}
 
