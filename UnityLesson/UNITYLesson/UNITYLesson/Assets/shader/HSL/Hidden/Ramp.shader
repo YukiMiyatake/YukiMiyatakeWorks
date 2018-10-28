@@ -22,9 +22,15 @@ Shader "Hidden/HSL/Ramp" {
 			#include "AutoLight.cginc"
 //			#include "Shaders/Include/HSL.cginc"
 			#pragma multi_compile_fwdbase
-			#pragma multi_compile _BLENDMODE_NORMAL _BLENDMODE_MULTIPLY _BLENDMODE_LINEARDODGE _BLENDMODE_SCREEN 
+			#pragma multi_compile _BLENDMODE_NONE _BLENDMODE_NORMAL _BLENDMODE_MULTIPLY _BLENDMODE_LINEARDODGE _BLENDMODE_SCREEN 
 			#pragma multi_compile _ _USE_NORMALMAP
 			#pragma multi_compile _ _USE_CLIP
+
+			#pragma multi_compile _ _USE_HATCHING
+			#pragma multi_compile _ _USE_RIM
+			#pragma multi_compile _ _USE_RAMP
+			#pragma multi_compile _ _USE_OUTLINE
+			#pragma multi_compile _ _USE_SPECULAR
 
 
 		//          #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
@@ -67,15 +73,29 @@ Shader "Hidden/HSL/Ramp" {
 
 			uniform sampler2D _RampTex; uniform float4 _RampTex_ST;
 			uniform float _RampV;
-			uniform float _ToonPower;
+			uniform float _ToonIntensity;
 			uniform float4 _ToonColor;
 			uniform float _ToonThreshold;
 
+#ifdef _USE_HATCHING
 			uniform sampler2D _ShadowTex; uniform float4 _ShadowTex_ST;
-			uniform float _ShadowPower;
 			uniform float _ShadowTexPower;
+			uniform float _ShadowTexRepeatU;
+			uniform float _ShadowTexRepeatV;
+#endif 
+			uniform float _ShadowPower;
+
+#ifdef _USE_SPECULAR
+			uniform float _SpecularIntensity;
 			uniform float _Spec1Power;
 			uniform float4 _Spec1Color;
+#endif
+
+#ifdef _USE_RIM
+			uniform float _RimColorIntensity;
+			uniform float3 _RimColor;
+			uniform float _RimPower;
+#endif
 
 #ifdef _USE_CLIP
 			uniform float _ClipThreshold;
@@ -125,34 +145,56 @@ Shader "Hidden/HSL/Ramp" {
 				// Diffuse(HalfLambert)
 				float3 NdotL = dot(N, L);
 				float3 diffuse = (NdotL*0.5 + 0.5);
+				
+				// rim
+#ifdef _USE_RIM
+//				float rim = 1.0 - saturate(dot(L, N));
+				float3 rimColor = pow(1.0 - dot(V,N), _RimPower) * _RimColor * _RimColorIntensity;
+#else
+				float3 rimColor = 0;
+#endif
 
-
-
-				float3 ramp = tex2D(_RampTex, float2(diffuse.x, _RampV));
-				float3 ramp2 = (diffuse.x >= _ToonThreshold) ? float3(1.0, 1.0, 1.0) : _ToonColor.xyz;
 
 
 				// Speculer
-				float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) * _Spec1Color.xyz * lightCol;  // Half vector
+#ifdef _USE_SPECULAR
+				float3 specular = pow(max(0.0, dot(H, N)), _Spec1Power) * _Spec1Color.xyz * lightCol * _SpecularIntensity;  // Half vector
+#else
+				float3 specular = 0;
+#endif
 
+
+				// Hatching
+#ifdef _USE_HATCHING
 				i.vpos.xy /= _ScreenParams.xy;
-
+				i.vpos.xy *= float2(_ShadowTexRepeatU, _ShadowTexRepeatV);
 				float3 shadowTex = lerp(lerp(1 - _ShadowTexPower, 1.0, tex2D(_ShadowTex, i.vpos.xy)), 1.0, SHADOW_ATTENUATION(i)* diffuse);
+#else
+				float3 shadowTex = 1;
+#endif
+
+
+				// Ramp
+				float3 ramp = tex2D(_RampTex, float2(diffuse.x, _RampV));
+				float3 ramp2 = (diffuse.x >= _ToonThreshold) ? float3(1.0, 1.0, 1.0) : _ToonColor.xyz;
+				float3 ramp3 = ramp * ramp2;
 
 				float3  albedo;
-				float3 ramp3 = ramp * ramp2;
-#ifdef _BLENDMODE_NORMAL
-				albedo = tex*(1 - _ToonPower) + ramp3 * _ToonPower;
+#ifdef _BLENDMODE_NONE
+				albedo = tex;
+#elif _BLENDMODE_NORMAL
+				albedo = tex*(1 - _ToonIntensity) + ramp3 * _ToonIntensity;
 #elif _BLENDMODE_MULTIPLY
-				albedo = lerp( tex, tex * ramp3, _ToonPower);
+				albedo = lerp( tex, tex * ramp3, _ToonIntensity);
 #elif _BLENDMODE_LINEARDODGE
-				albedo = tex + ramp * ramp2 * _ToonPower;
+				albedo = tex + ramp * ramp2 * _ToonIntensity;
 #elif _BLENDMODE_SCREEN
-				albedo = lerp(tex, tex + ramp3 - (tex*ramp3), _ToonPower);
+				albedo = lerp(tex, tex + ramp3 - (tex*ramp3), _ToonIntensity);
 #else
-				albedo = tex*(1 - _ToonPower) + ramp3 * _ToonPower;
+				albedo = tex*(1 - _ToonIntensity) + ramp3 * _ToonIntensity;
 #endif
-				return float4(saturate(/* ambient* */ albedo * shadowTex + specular), 1.0);
+
+				return float4(saturate(/* ambient* */ albedo * shadowTex +  rimColor + specular), 1.0);
 			}
 			ENDCG
 
