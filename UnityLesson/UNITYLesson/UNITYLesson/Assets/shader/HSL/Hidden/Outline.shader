@@ -8,8 +8,9 @@ Shader "Hidden/HSL/Outline" {
 	SubShader{
 		Pass
 		{
-			Tags{ "Queue" = "Geometry" "RenderType" = "Opaque" }
+			Tags{ "Queue" = "Geometry"  }
 			Name "OUTLINE"
+			Blend[_SrcBlend][_DstBlend]
 
 			Lighting Off
 			Cull Front
@@ -40,7 +41,7 @@ Shader "Hidden/HSL/Outline" {
 				float3 normal : NORMAL;
 				float2 texcoord	  : TEXCOORD0;
 #ifdef _USE_VERTEX_OUTLINE
-				fixed4 outline : COLOR0;
+				fixed4 color : COLOR;
 #endif
 			};
 
@@ -73,7 +74,7 @@ Shader "Hidden/HSL/Outline" {
 				o.pos = UnityObjectToClipPos(v.vertex);
 
 #ifdef _USE_VERTEX_OUTLINE
-				o.pos.xy += offset * i.outline.a * _OutlineWidth * 0.001;
+				o.pos.xy += offset * v.color.a * _OutlineWidth * 0.001;
 				o.outlineColor = _OutlineColor;
 #else
 				o.pos.xy += offset * _OutlineWidth * 0.001;

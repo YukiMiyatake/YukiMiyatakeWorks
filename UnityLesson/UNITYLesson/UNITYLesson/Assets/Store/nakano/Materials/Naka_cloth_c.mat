@@ -7,13 +7,14 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Naka_cloth_c
-  m_Shader: {fileID: 4800000, guid: e50ce2d94441a374294364fb26b6a426, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 90835eff98b7b644ca8caddb7a6b92b5, type: 3}
+  m_ShaderKeywords: _BLENDMODE_NONE _ZWRITE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -87,6 +88,8 @@ Material:
     - _ShadowPower: 0.721
     - _ShadowStencilRef: 1
     - _ShadowTexPower: 0.881
+    - _ShadowTexRepeatU: 1
+    - _ShadowTexRepeatV: 1
     - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
     - _Spec1Intensity: 0
@@ -94,12 +97,17 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0
     - _SrcBlend: 1
+    - _ToonIntensity: 0.5
     - _ToonPower: 0.5
     - _ToonThreshold: 0
     - _UVSec: 0
     - _ZWrite: 1
     - _useClip: 0
+    - _useHatching: 0
     - _useNormalMap: 0
+    - _useOutline: 0
+    - _useRim: 0
+    - _useSpecular: 0
     - _useVertexOutline: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
