@@ -11,6 +11,7 @@ Shader "Hidden/HSL/Ramp" {
 			Name "RAMP"
 			Tags{ "LightMode" = "ForwardBase" }
 			Cull Back
+			Blend[_SrcBlend][_DstBlend]
 
 			CGPROGRAM
 
@@ -29,7 +30,8 @@ Shader "Hidden/HSL/Ramp" {
 			#pragma multi_compile _ _USE_HATCHING
 			#pragma multi_compile _ _USE_RIM
 			#pragma multi_compile _ _USE_RAMP
-			#pragma multi_compile _ _USE_OUTLINE
+//#pragma multi_compile _ _USE_OUTLINE
+//#pragma multi_compile _ _USE_VERTEX_OUTLINE
 			#pragma multi_compile _ _USE_SPECULAR
 
 
@@ -170,7 +172,7 @@ Shader "Hidden/HSL/Ramp" {
 				i.vpos.xy *= float2(_ShadowTexRepeatU, _ShadowTexRepeatV);
 				float3 shadowTex = lerp(lerp(1 - _ShadowTexPower, 1.0, tex2D(_ShadowTex, i.vpos.xy)), 1.0, SHADOW_ATTENUATION(i)* diffuse);
 #else
-				float3 shadowTex = 1;
+				float3 shadowTex = SHADOW_ATTENUATION(i);
 #endif
 
 
@@ -194,7 +196,7 @@ Shader "Hidden/HSL/Ramp" {
 				albedo = tex*(1 - _ToonIntensity) + ramp3 * _ToonIntensity;
 #endif
 
-				return float4(saturate(/* ambient* */ albedo * shadowTex +  rimColor + specular), 1.0);
+				return float4(saturate(/* ambient* */ albedo * shadowTex * lightCol +  rimColor + specular), 1.0);
 			}
 			ENDCG
 
