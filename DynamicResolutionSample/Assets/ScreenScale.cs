@@ -7,6 +7,13 @@ public class ScreenScale : MonoBehaviour
 {
     private Slider slider_;
 
+    public float Val
+    {
+        set => slider_.value = Mathf.Clamp(value, 0.01f, 1.0f);
+        get => slider_.value;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +27,7 @@ public class ScreenScale : MonoBehaviour
 //        var scale = slider_.value;
         ScalableBufferManager.ResizeBuffers( val, val );
     }
+
+
 
 }
