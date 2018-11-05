@@ -122,7 +122,88 @@ float4 frag( v2f i ) : COLOR
 	float3_t shadowColor = diffSamplerColor.rgb * diffSamplerColor.rgb;
 	float3_t combinedColor = lerp( diffSamplerColor.rgb, shadowColor, falloffSamplerColor.r );
 	combinedColor *= ( 1.0 + falloffSamplerColor.rgb * falloffSamplerColor.a );
+    
+    
+    //Dammy
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
 
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+    
+    if(combinedColor.x > 0.5){
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+    }else{
+        normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );normalDotEye = dot( normalVec, i.eyeDir.xyz );
+
+    }
+
+    
 	// Specular
 	// Use the eye vector as the light vector
 	float4_t reflectionMaskColor = tex2D( _SpecularReflectionSampler, i.uv.xy );

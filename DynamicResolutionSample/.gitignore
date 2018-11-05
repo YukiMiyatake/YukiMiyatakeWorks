@@ -6,6 +6,8 @@ Obj/
 UnityGenerated/
 Library/
 
+*.apk
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
