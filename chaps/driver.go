@@ -1,18 +1,5 @@
 /*
-  TODO: 管理権限必要・・
-  TODO: チャンネル名をチャンネルIDに変換
-  TODO: チャンネルリスト対応
-  TODO: BOT_NAMEから BotIDをひく
-  TODO: VerificationToken調査
-  TODO: 会話機能
-  TODO: イメージリストを選択式に
-  TODO: makefile
-  TODO: ランチ機能
-  TODO: リージョンなどを設定ファイルから読む
-  TODO: 異リージョンの切り替え？
-  TODO: AWSプラグインを同じフォルダに置きたいところ
-  TODO: 設定ファイルの動的読み込み機能
-  TODO: 全体ヘルプ
+  テスト用のコマンドラインドライバー
 */
 package main
 
@@ -26,15 +13,14 @@ import (
 
 	"github.com/kelseyhightower/envconfig"
 	"github.com/nlopes/slack"
-
 )
 
 
 func main() {
-	os.Exit(_main(os.Args[1:]))
+	os.Exit( driver_main(os.Args[1:]))
 }
 
-func _main(args []string) int {
+func driver_main(args []string) int {
 	var env slackConfig
 	if err := envconfig.Process("", &env); err != nil {
 		log.Printf("[Error] Failed to process env var: %s", err)
