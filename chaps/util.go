@@ -28,3 +28,4 @@ func loadPlugin(plug *map[string]plugin.Symbol, name string, path string) {
 	}
 	(*plug)[name] = pv
 }
+
