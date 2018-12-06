@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package main
 
 import (
@@ -12,3 +13,19 @@ func OnMention(s []string) (string) {
         return strings.Join(s, " ");
 }
 
+=======
+package main
+
+import (
+//	"fmt"
+	"strings"
+)
+
+func Init() {
+}
+
+func OnMention(s []string) (string) {
+        return strings.Join(s, " ");
+}
+
+>>>>>>> GOSICK

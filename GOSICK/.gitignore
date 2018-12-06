@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.env
 *.so
 *.exe
@@ -8,3 +9,17 @@
 .env
 .credentials
 aws.json
+=======
+chaps
+*.env
+*.so
+*.exe
+
+.vscode/*
+
+*.pem
+.env
+.credentials
+aws.json
+GOSICK
+>>>>>>> GOSICK
