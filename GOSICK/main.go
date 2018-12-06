@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-/*
-=======
 // +build !cmd_driver
 
 /*
   TODO: プラグイン interface作る
   TODO: ポインタまわり見直す
->>>>>>> GOSICK
   TODO: 管理権限必要・・
   TODO: チャンネル名をチャンネルIDに変換
   TODO: チャンネルリスト対応
@@ -21,11 +17,8 @@
   TODO: AWSプラグインを同じフォルダに置きたいところ
   TODO: 設定ファイルの動的読み込み機能
   TODO: 全体ヘルプ
-<<<<<<< HEAD
-=======
   TODO: リスナー形式に
   TODO: AWSプラグイン シングルトン設計検討
->>>>>>> GOSICK
 */
 package main
 
@@ -37,19 +30,12 @@ import (
 	"plugin"
 	//  "echo"
 
-<<<<<<< HEAD
-=======
 	"github.com/YukiMiyatake/GOSICK/lib"
->>>>>>> GOSICK
 	"github.com/kelseyhightower/envconfig"
 	"github.com/nlopes/slack"
 )
 
-<<<<<<< HEAD
-type envConfig struct {
-=======
 type slackConfig struct {
->>>>>>> GOSICK
 	Port              string `envconfig:"PORT" default: "3000"`
 	BotToken          string `envconfig:"BOT_TOKEN" required: "true"`
 	VerificationToken string `envconfig:"VERIFICATION_TOKEN" required: "true"`
@@ -62,11 +48,7 @@ func main() {
 }
 
 func _main(args []string) int {
-<<<<<<< HEAD
-	var env envConfig
-=======
 	var env slackConfig
->>>>>>> GOSICK
 	if err := envconfig.Process("", &env); err != nil {
 		log.Printf("[Error] Failed to process env var: %s", err)
 		return 1
@@ -79,14 +61,6 @@ func _main(args []string) int {
 	var allmsg = map[string]plugin.Symbol{}
 	var mention = map[string]plugin.Symbol{}
 
-<<<<<<< HEAD
-	loadPlugin(&mention, "echo", "plugins/echo/echo.so")
-	loadPlugin(&mention, "aws", "plugins/aws/aws.so")
-	loadPlugin(&mention, "sqs", "plugins/sqs/sqs.so")
-	//loadPlugin(&mention, "ecr", "plugins/ecr/ecr.so")
-	//loadPlugin(&mention, "ecs", "plugins/ecs/ecs.so")
-	
-=======
 	lib.LoadPlugin(&mention, "memo", "plugins/memo/memo.so")
 	lib.LoadPlugin(&mention, "echo", "plugins/echo/echo.so")
 	//	loadPlugin(&mention, "aws", "plugins/aws/aws.so")
@@ -94,7 +68,6 @@ func _main(args []string) int {
 	//loadPlugin(&mention, "ecr", "plugins/ecr/ecr.so")
 	//loadPlugin(&mention, "ecs", "plugins/ecs/ecs.so")
 
->>>>>>> GOSICK
 	slackListener := &SlackListener{
 		client:    client,
 		botID:     env.BotID,
@@ -118,29 +91,3 @@ func _main(args []string) int {
 	return 0
 }
 
-<<<<<<< HEAD
-func loadPlugin(plug *map[string]plugin.Symbol, name string, path string) {
-	log.Printf("loadPlugin:" + name + ": " + path   )
-	
-	p, err := plugin.Open(path)
-	if err != nil {
-		log.Printf("fail to load plugin [%s]", path )
-		return
-	}
-
-	init, e := p.Lookup("Init")
-	if e != nil {
-		log.Printf("fail to Lookup 'init'")
-		return
-	}
-	init.(func())()
-
-	pv, err := p.Lookup("OnMention")
-	if err != nil {
-		log.Printf("fail to Lookup 'OnMention'")
-		return
-	}
-	(*plug)[name] = pv
-}
-=======
->>>>>>> GOSICK
