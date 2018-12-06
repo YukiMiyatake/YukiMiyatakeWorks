@@ -10,3 +10,9 @@ chaps
 .credentials
 aws.json
 GOSICK
+
+slack.json
+
+# データ永続化
+/docker/construct_redis/data/*
+!.gitkeep
