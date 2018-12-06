@@ -12,14 +12,14 @@ import (
 	"os"
 	//	"plugins/echo"
 	"plugin"
+	//  "echo"
 
-	"github.com/YukiMiyatake/GOSICK/lib"
-	"github.com/YukiMiyatake/GOSICK/lib/container"
-	"github.com/kelseyhightower/envconfig"
+	"io/ioutil"
+	"encoding/json"
 )
 
 type cmdConfig struct {
-	BotName             []string `envconfig:"BOT_NAME" default: {"gosick", "regina"}  required: "false"`
+	BotName             []string `json:"BOT_NAME"`
 }
 
 func main() {
@@ -38,22 +38,39 @@ func _main(args []string) int {
 	log.Printf( strconv.FormatBool( Contains( vs, "1")) )
 */
 
+	jsonData, err := ioutil.ReadFile("./slack.json")
+	if err != nil {
+		log.Print("error")
+	}
 
-	var env cmdConfig
-	if err := envconfig.Process("", &env); err != nil {
+	var cc cmdConfig
+
+	err = json.Unmarshal(jsonData, &cc)
+	if err != nil {
 		log.Print("error")
 	}
 	//client.SetDebug(true)
 //	var allmsg = map[string]plugin.Symbol{}
 	var mention = map[string]plugin.Symbol{}
 
-	// TODO: yuki load from Json
-	lib.LoadPlugin(&mention, "memo", "plugins/memo/memo.so")
-	lib.LoadPlugin(&mention, "echo", "plugins/echo/echo.so")
-	//	loadPlugin(&mention, "aws", "plugins/aws/aws.so")
-	//	loadPlugin(&mention, "sqs", "plugins/sqs/sqs.so")
-	//loadPlugin(&mention, "ecr", "plugins/ecr/ecr.so")
-	//loadPlugin(&mention, "ecs", "plugins/ecs/ecs.so")
+	pluginJson, err := ioutil.ReadFile("./plugin.json")
+	if err != nil {
+		log.Printf("[Error] %s", err)
+		return 1
+	}
+	type PluginData struct {
+		Name string `json:"NAME"`
+		Path string `json:"PATH"`
+	}
+	var pd []PluginData
+	err = json.Unmarshal(pluginJson, &pd)
+	if err != nil {
+		log.Printf("[Error] %s", err)
+		return 1
+	}
+	for _, p := range pd {
+		loadPlugin(&mention, p.Name, p.Path)
+	}
 
 //*
 //	コマンドライン入力
@@ -68,7 +85,7 @@ func _main(args []string) int {
 
 		msgs := strings.Fields( text )
 		// TODO: load from Env or JSON
-		if (container.Contains( []string{"regina","gosick"}, msgs[0])) {
+		if (Contains( cc.BotName, msgs[0])) {
 //		if (msgs[0] == "regina") {
 			for key, value := range mention {
 				if msgs[1] == key {
