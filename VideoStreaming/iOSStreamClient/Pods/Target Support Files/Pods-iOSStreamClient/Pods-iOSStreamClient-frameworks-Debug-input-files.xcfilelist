@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
+${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework
+${BUILT_PRODUCTS_DIR}/ORStackView/ORStackView.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
