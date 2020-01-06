@@ -1,0 +1,6 @@
+framework module Pods_iOSStreamClient {
+  umbrella header "Pods-iOSStreamClient-umbrella.h"
+
+  export *
+  module * { export * }
+}

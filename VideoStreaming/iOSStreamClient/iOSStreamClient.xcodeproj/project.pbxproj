@@ -1,0 +1,664 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97FA8477E480C93C3AFD4C00 /* Pods_iOSStreamClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1E042C1785235FA7F0719B /* Pods_iOSStreamClient.framework */; };
+		E2FC12D923C2508500208639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC12D823C2508500208639 /* AppDelegate.swift */; };
+		E2FC12DB23C2508500208639 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC12DA23C2508500208639 /* SceneDelegate.swift */; };
+		E2FC12DD23C2508500208639 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC12DC23C2508500208639 /* ContentView.swift */; };
+		E2FC12DF23C2508600208639 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FC12DE23C2508600208639 /* Assets.xcassets */; };
+		E2FC12E223C2508600208639 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FC12E123C2508600208639 /* Preview Assets.xcassets */; };
+		E2FC12E523C2508600208639 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2FC12E323C2508600208639 /* LaunchScreen.storyboard */; };
+		E2FC12F023C2508600208639 /* iOSStreamClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC12EF23C2508600208639 /* iOSStreamClientTests.swift */; };
+		E2FC12FB23C2508600208639 /* iOSStreamClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC12FA23C2508600208639 /* iOSStreamClientUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E2FC12EC23C2508600208639 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E2FC12CD23C2508500208639 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2FC12D423C2508500208639;
+			remoteInfo = iOSStreamClient;
+		};
+		E2FC12F723C2508600208639 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E2FC12CD23C2508500208639 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2FC12D423C2508500208639;
+			remoteInfo = iOSStreamClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4E76D024BF8253F4F32FBBD1 /* Pods-iOSStreamClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSStreamClient.debug.xcconfig"; path = "Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient.debug.xcconfig"; sourceTree = "<group>"; };
+		CE148AAC3C683023BD81D725 /* Pods-iOSStreamClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSStreamClient.release.xcconfig"; path = "Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient.release.xcconfig"; sourceTree = "<group>"; };
+		DA1E042C1785235FA7F0719B /* Pods_iOSStreamClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSStreamClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2FC12D523C2508500208639 /* iOSStreamClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSStreamClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2FC12D823C2508500208639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E2FC12DA23C2508500208639 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E2FC12DC23C2508500208639 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E2FC12DE23C2508600208639 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2FC12E123C2508600208639 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E2FC12E423C2508600208639 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E2FC12E623C2508600208639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2FC12EB23C2508600208639 /* iOSStreamClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSStreamClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2FC12EF23C2508600208639 /* iOSStreamClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSStreamClientTests.swift; sourceTree = "<group>"; };
+		E2FC12F123C2508600208639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2FC12F623C2508600208639 /* iOSStreamClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSStreamClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2FC12FA23C2508600208639 /* iOSStreamClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSStreamClientUITests.swift; sourceTree = "<group>"; };
+		E2FC12FC23C2508600208639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E2FC12D223C2508500208639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97FA8477E480C93C3AFD4C00 /* Pods_iOSStreamClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12E823C2508600208639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12F323C2508600208639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4BE589F058079C4807D47FE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA1E042C1785235FA7F0719B /* Pods_iOSStreamClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		625A4045E7FD6E897AD1771B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E76D024BF8253F4F32FBBD1 /* Pods-iOSStreamClient.debug.xcconfig */,
+				CE148AAC3C683023BD81D725 /* Pods-iOSStreamClient.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E2FC12CC23C2508500208639 = {
+			isa = PBXGroup;
+			children = (
+				E2FC12D723C2508500208639 /* iOSStreamClient */,
+				E2FC12EE23C2508600208639 /* iOSStreamClientTests */,
+				E2FC12F923C2508600208639 /* iOSStreamClientUITests */,
+				E2FC12D623C2508500208639 /* Products */,
+				625A4045E7FD6E897AD1771B /* Pods */,
+				4BE589F058079C4807D47FE7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E2FC12D623C2508500208639 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC12D523C2508500208639 /* iOSStreamClient.app */,
+				E2FC12EB23C2508600208639 /* iOSStreamClientTests.xctest */,
+				E2FC12F623C2508600208639 /* iOSStreamClientUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E2FC12D723C2508500208639 /* iOSStreamClient */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC12D823C2508500208639 /* AppDelegate.swift */,
+				E2FC12DA23C2508500208639 /* SceneDelegate.swift */,
+				E2FC12DC23C2508500208639 /* ContentView.swift */,
+				E2FC12DE23C2508600208639 /* Assets.xcassets */,
+				E2FC12E323C2508600208639 /* LaunchScreen.storyboard */,
+				E2FC12E623C2508600208639 /* Info.plist */,
+				E2FC12E023C2508600208639 /* Preview Content */,
+			);
+			path = iOSStreamClient;
+			sourceTree = "<group>";
+		};
+		E2FC12E023C2508600208639 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC12E123C2508600208639 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E2FC12EE23C2508600208639 /* iOSStreamClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC12EF23C2508600208639 /* iOSStreamClientTests.swift */,
+				E2FC12F123C2508600208639 /* Info.plist */,
+			);
+			path = iOSStreamClientTests;
+			sourceTree = "<group>";
+		};
+		E2FC12F923C2508600208639 /* iOSStreamClientUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC12FA23C2508600208639 /* iOSStreamClientUITests.swift */,
+				E2FC12FC23C2508600208639 /* Info.plist */,
+			);
+			path = iOSStreamClientUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E2FC12D423C2508500208639 /* iOSStreamClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2FC12FF23C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClient" */;
+			buildPhases = (
+				34F0564F7E5D763A312771E1 /* [CP] Check Pods Manifest.lock */,
+				E2FC12D123C2508500208639 /* Sources */,
+				E2FC12D223C2508500208639 /* Frameworks */,
+				E2FC12D323C2508500208639 /* Resources */,
+				C5E7DB022A41412FFE71FA00 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSStreamClient;
+			productName = iOSStreamClient;
+			productReference = E2FC12D523C2508500208639 /* iOSStreamClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E2FC12EA23C2508600208639 /* iOSStreamClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2FC130223C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClientTests" */;
+			buildPhases = (
+				E2FC12E723C2508600208639 /* Sources */,
+				E2FC12E823C2508600208639 /* Frameworks */,
+				E2FC12E923C2508600208639 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E2FC12ED23C2508600208639 /* PBXTargetDependency */,
+			);
+			name = iOSStreamClientTests;
+			productName = iOSStreamClientTests;
+			productReference = E2FC12EB23C2508600208639 /* iOSStreamClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E2FC12F523C2508600208639 /* iOSStreamClientUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2FC130523C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClientUITests" */;
+			buildPhases = (
+				E2FC12F223C2508600208639 /* Sources */,
+				E2FC12F323C2508600208639 /* Frameworks */,
+				E2FC12F423C2508600208639 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E2FC12F823C2508600208639 /* PBXTargetDependency */,
+			);
+			name = iOSStreamClientUITests;
+			productName = iOSStreamClientUITests;
+			productReference = E2FC12F623C2508600208639 /* iOSStreamClientUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E2FC12CD23C2508500208639 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "murasame-lab";
+				TargetAttributes = {
+					E2FC12D423C2508500208639 = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					E2FC12EA23C2508600208639 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = E2FC12D423C2508500208639;
+					};
+					E2FC12F523C2508600208639 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = E2FC12D423C2508500208639;
+					};
+				};
+			};
+			buildConfigurationList = E2FC12D023C2508500208639 /* Build configuration list for PBXProject "iOSStreamClient" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E2FC12CC23C2508500208639;
+			productRefGroup = E2FC12D623C2508500208639 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E2FC12D423C2508500208639 /* iOSStreamClient */,
+				E2FC12EA23C2508600208639 /* iOSStreamClientTests */,
+				E2FC12F523C2508600208639 /* iOSStreamClientUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E2FC12D323C2508500208639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2FC12E523C2508600208639 /* LaunchScreen.storyboard in Resources */,
+				E2FC12E223C2508600208639 /* Preview Assets.xcassets in Resources */,
+				E2FC12DF23C2508600208639 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12E923C2508600208639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12F423C2508600208639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34F0564F7E5D763A312771E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSStreamClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5E7DB022A41412FFE71FA00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSStreamClient/Pods-iOSStreamClient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E2FC12D123C2508500208639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2FC12D923C2508500208639 /* AppDelegate.swift in Sources */,
+				E2FC12DB23C2508500208639 /* SceneDelegate.swift in Sources */,
+				E2FC12DD23C2508500208639 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12E723C2508600208639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2FC12F023C2508600208639 /* iOSStreamClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2FC12F223C2508600208639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2FC12FB23C2508600208639 /* iOSStreamClientUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E2FC12ED23C2508600208639 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E2FC12D423C2508500208639 /* iOSStreamClient */;
+			targetProxy = E2FC12EC23C2508600208639 /* PBXContainerItemProxy */;
+		};
+		E2FC12F823C2508600208639 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E2FC12D423C2508500208639 /* iOSStreamClient */;
+			targetProxy = E2FC12F723C2508600208639 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E2FC12E323C2508600208639 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E2FC12E423C2508600208639 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E2FC12FD23C2508600208639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E2FC12FE23C2508600208639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E2FC130023C2508600208639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E76D024BF8253F4F32FBBD1 /* Pods-iOSStreamClient.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iOSStreamClient/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOSStreamClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClient";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E2FC130123C2508600208639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE148AAC3C683023BD81D725 /* Pods-iOSStreamClient.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iOSStreamClient/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOSStreamClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClient";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E2FC130323C2508600208639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSStreamClientTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSStreamClient.app/iOSStreamClient";
+			};
+			name = Debug;
+		};
+		E2FC130423C2508600208639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSStreamClientTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSStreamClient.app/iOSStreamClient";
+			};
+			name = Release;
+		};
+		E2FC130623C2508600208639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSStreamClientUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSStreamClient;
+			};
+			name = Debug;
+		};
+		E2FC130723C2508600208639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSStreamClientUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "murasame-lab.iOSStreamClientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSStreamClient;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E2FC12D023C2508500208639 /* Build configuration list for PBXProject "iOSStreamClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2FC12FD23C2508600208639 /* Debug */,
+				E2FC12FE23C2508600208639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2FC12FF23C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2FC130023C2508600208639 /* Debug */,
+				E2FC130123C2508600208639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2FC130223C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2FC130323C2508600208639 /* Debug */,
+				E2FC130423C2508600208639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2FC130523C2508600208639 /* Build configuration list for PBXNativeTarget "iOSStreamClientUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2FC130623C2508600208639 /* Debug */,
+				E2FC130723C2508600208639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E2FC12CD23C2508500208639 /* Project object */;
+}
