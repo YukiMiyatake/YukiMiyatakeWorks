@@ -9,4 +9,7 @@ def main(global_config, **settings):
     config.include('.models')
     config.include('.routes')
     config.scan()
+    
+    config.add_jinja2_renderer(".html")
+
     return config.make_wsgi_app()
