@@ -1,3 +1,4 @@
+import logging
 from pyramid.response import Response
 from pyramid.view import view_config
 
@@ -8,7 +9,16 @@ from deform.widget import TextAreaWidget
 from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
 from ..models import MyModel
+#from pylons.controllers.util import abort, redirect
+from pyramid.httpexceptions import HTTPFound
 
+logger = logging.getLogger(__name__)
+
+from deform import (
+    Form,
+    ValidationFailure,
+    widget
+)
 
 class Views(object):
     def __init__(self, request):
@@ -27,5 +37,15 @@ class Views(object):
 
     @view_config(route_name="newpage", renderer="../templates/newpage.html")
     def newpage(self):
-        username = self.request.params.get("username", "")
-        return {"username": username}
+        if 'newpage' in self.request.params:
+            controls = self.request.POST.items()
+
+            try:
+                self.form_.validate(controls)
+            except ValidationFailure as e:
+                return HTTPFound(location='/')
+
+
+        username = self.request.params.get("username")
+        email = self.request.params.get("email")
+        return {"username": username, "email": email }
