@@ -2,8 +2,8 @@
 body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
-  color: #ffffff;
-  background: #bc2131;
+  color: #000000;
+  background: #ffffff;
 }
 h1,
 h2,
@@ -45,7 +45,7 @@ p {
   color: #f2b7bd;
 }
 .starter-template .content .lead .font-normal {
-  color: #ffffff;
+  color: #f2676d;
 }
 .starter-template .links {
   float: right;
