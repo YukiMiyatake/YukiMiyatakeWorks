@@ -27,30 +27,36 @@ class Views(object):
     @reify
     def form_(self):
         schema = NewPageSchema()
-        btn = deform.form.Button(name="newpage", title="newpage")
-        return deform.form.Form(schema, buttons=(btn,), action="/")
+        newpage = deform.form.Button(name="newpage", title="newpage")
+        return deform.form.Form(schema, buttons=(newpage,), action="/")
 
     @view_config(route_name='home', renderer='../templates/mytemplate.html')
     def my_view(self):
         form = {}
+
         if 'newpage' in self.request.params:
             controls = self.request.POST.items()
 
             try:
                 self.form_.validate(controls)
-                self.request.session["testapp.username"] = self.request.params.get("username")
-                self.request.session["testapp.email"] = self.request.params.get("email")
+                appstruct = { "username": self.request.params.get("username"), "email": self.request.params.get("email")}
+                self.request.session["testapp.formdata"] = appstruct
                 return HTTPFound(location= self.request.route_url('newpage'))
             except ValidationFailure as e:
                 form=e.render()
         else:
-            form = self.form_.render()
+            appstruct = self.request.session.get("testapp.formdata", None)
+            if appstruct is None:
+                form = self.form_.render()
+            else:
+                form = self.form_.render(appstruct)
 
         return {"rendered_form": form}
 
     @view_config(route_name="newpage", renderer="../templates/newpage.html")
     def newpage(self):
 
-        username = self.request.session["testapp.username"]
-        email = self.request.session["testapp.email"]
+        appstruct = self.request.session["testapp.formdata"] 
+        username = appstruct["username"]
+        email = appstruct["email"]
         return {"username": username, "email": email }
