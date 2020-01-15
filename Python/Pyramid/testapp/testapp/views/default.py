@@ -27,25 +27,36 @@ class Views(object):
     @reify
     def form_(self):
         schema = NewPageSchema()
-        btn = deform.form.Button(name="newpage", title="newpage")
-        return deform.form.Form(schema, buttons=(btn,), action="/newpage")
+        newpage = deform.form.Button(name="newpage", title="newpage")
+        return deform.form.Form(schema, buttons=(newpage,), action="/")
 
     @view_config(route_name='home', renderer='../templates/mytemplate.html')
     def my_view(self):
-        form = self.form_.render()
-        return {"rendered_form": form}
+        form = {}
 
-    @view_config(route_name="newpage", renderer="../templates/newpage.html")
-    def newpage(self):
         if 'newpage' in self.request.params:
             controls = self.request.POST.items()
 
             try:
                 self.form_.validate(controls)
+                jvalue = { "username": self.request.params.get("username"), "email": self.request.params.get("email")}
+                self.request.session["testapp.formdata"] = jvalue
+                return HTTPFound(location= self.request.route_url('newpage'))
             except ValidationFailure as e:
-                return HTTPFound(location='/')
+                form=e.render()
+        else:
+            jvalue = self.request.session.get("testapp.formdata", None)
+            if jvalue is None:
+                form = self.form_.render()
+            else:
+                form = self.form_.render(jvalue)
 
+        return {"rendered_form": form}
 
-        username = self.request.params.get("username")
-        email = self.request.params.get("email")
+    @view_config(route_name="newpage", renderer="../templates/newpage.html")
+    def newpage(self):
+
+        jvalue = self.request.session["testapp.formdata"] 
+        username = jvalue["username"]
+        email = jvalue["email"]
         return {"username": username, "email": email }
