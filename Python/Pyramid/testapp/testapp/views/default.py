@@ -39,24 +39,24 @@ class Views(object):
 
             try:
                 self.form_.validate(controls)
-                appstruct = { "username": self.request.params.get("username"), "email": self.request.params.get("email")}
-                self.request.session["testapp.formdata"] = appstruct
+                jvalue = { "username": self.request.params.get("username"), "email": self.request.params.get("email")}
+                self.request.session["testapp.formdata"] = jvalue
                 return HTTPFound(location= self.request.route_url('newpage'))
             except ValidationFailure as e:
                 form=e.render()
         else:
-            appstruct = self.request.session.get("testapp.formdata", None)
-            if appstruct is None:
+            jvalue = self.request.session.get("testapp.formdata", None)
+            if jvalue is None:
                 form = self.form_.render()
             else:
-                form = self.form_.render(appstruct)
+                form = self.form_.render(jvalue)
 
         return {"rendered_form": form}
 
     @view_config(route_name="newpage", renderer="../templates/newpage.html")
     def newpage(self):
 
-        appstruct = self.request.session["testapp.formdata"] 
-        username = appstruct["username"]
-        email = appstruct["email"]
+        jvalue = self.request.session["testapp.formdata"] 
+        username = jvalue["username"]
+        email = jvalue["email"]
         return {"username": username, "email": email }
