@@ -9,16 +9,14 @@ from deform.widget import TextAreaWidget
 from pyramid.decorator import reify
 from pyramid.renderers import get_renderer
 from ..models import MyModel
-#from pylons.controllers.util import abort, redirect
+
+# from pylons.controllers.util import abort, redirect
 from pyramid.httpexceptions import HTTPFound
 
 logger = logging.getLogger(__name__)
 
-from deform import (
-    Form,
-    ValidationFailure,
-    widget
-)
+from deform import Form, ValidationFailure, widget
+
 
 class Views(object):
     def __init__(self, request):
@@ -30,20 +28,23 @@ class Views(object):
         newpage = deform.form.Button(name="newpage", title="newpage")
         return deform.form.Form(schema, buttons=(newpage,), action="/")
 
-    @view_config(route_name='home', renderer='../templates/mytemplate.html')
+    @view_config(route_name="home", renderer="../templates/mytemplate.html")
     def my_view(self):
         form = {}
 
-        if 'newpage' in self.request.params:
+        if "newpage" in self.request.params:
             controls = self.request.POST.items()
 
             try:
                 self.form_.validate(controls)
-                jvalue = { "username": self.request.params.get("username"), "email": self.request.params.get("email")}
+                jvalue = {
+                    "username": self.request.params.get("username"),
+                    "email": self.request.params.get("email"),
+                }
                 self.request.session["testapp.formdata"] = jvalue
-                return HTTPFound(location= self.request.route_url('newpage'))
+                return HTTPFound(location=self.request.route_url("newpage"))
             except ValidationFailure as e:
-                form=e.render()
+                form = e.render()
         else:
             jvalue = self.request.session.get("testapp.formdata", None)
             if jvalue is None:
@@ -56,7 +57,7 @@ class Views(object):
     @view_config(route_name="newpage", renderer="../templates/newpage.html")
     def newpage(self):
 
-        jvalue = self.request.session["testapp.formdata"] 
+        jvalue = self.request.session["testapp.formdata"]
         username = jvalue["username"]
         email = jvalue["email"]
-        return {"username": username, "email": email }
+        return {"username": username, "email": email}
