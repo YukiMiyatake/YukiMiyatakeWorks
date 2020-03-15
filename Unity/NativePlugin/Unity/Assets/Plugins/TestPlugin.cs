@@ -12,7 +12,48 @@ public class CS_Rect{
 
 public class TestPlugin : MonoBehaviour
 {
-#if UNITY_EDITOR
+
+#if UNITY_ANDROID
+    [DllImport("myplugin")]
+    private static extern void test_native();
+
+#endif
+
+#if UNITY_IOS
+    [DllImport("__Internal")]
+    private static extern void test_();
+    [DllImport("__Internal")]
+    private static extern long test_long_(long v);
+    [DllImport("__Internal")]
+    private static extern float test_float_(float v);
+
+    [DllImport("__Internal")]
+    private static extern string test_string_(string v);
+    [DllImport("__Internal")]
+    private static extern void test_string0_(string v);
+    [DllImport("__Internal")]
+    private static extern string test_string_in_(in string v);
+    [DllImport("__Internal")]
+    private static extern string test_string_out_(out string v);
+    [DllImport("__Internal")]
+    private static extern string test_string_ref_(ref string v);
+    [DllImport("__Internal")]
+    private static extern void test_intarray_(int[] hoge, int num);
+    [DllImport("__Internal")]
+    private static extern void test_intarray_ref_([In,Out] int[] hoge, ref int num);
+    [DllImport("__Internal")]
+    private static extern void test_intarray_ref2_([In,Out] IntPtr hoge, ref int num);
+    [DllImport("__Internal")]
+    private static extern IntPtr test_pointer_(IntPtr ptr);
+    [DllImport("__Internal")]
+    private static extern IntPtr test_pointer2_get_(int n);
+    [DllImport("__Internal")]
+    private static extern int test_pointer2_(IntPtr v);
+    [DllImport("__Internal")]
+    private static extern CS_Rect test_rect_(CS_Rect v);
+
+#else
+
     private static void test_()
     {
         Debug.Log("Test");
@@ -83,49 +124,6 @@ public class TestPlugin : MonoBehaviour
     {
         return (v);
     }
-
-#elif UNITY_IPHONE
-    [DllImport("__Internal")]
-    private static extern void test_();
-    [DllImport("__Internal")]
-    private static extern long test_long_(long v);
-    [DllImport("__Internal")]
-    private static extern float test_float_(float v);
-
-    [DllImport("__Internal")]
-    private static extern string test_string_(string v);
-    [DllImport("__Internal")]
-    private static extern void test_string0_(string v);
-    [DllImport("__Internal")]
-    private static extern string test_string_in_(in string v);
-    [DllImport("__Internal")]
-    private static extern string test_string_out_(out string v);
-    [DllImport("__Internal")]
-    private static extern string test_string_ref_(ref string v);
-    [DllImport("__Internal")]
-    private static extern void test_intarray_(int[] hoge, int num);
-    [DllImport("__Internal")]
-    private static extern void test_intarray_ref_([In,Out] int[] hoge, ref int num);
-    [DllImport("__Internal")]
-    private static extern void test_intarray_ref2_([In,Out] IntPtr hoge, ref int num);
-    [DllImport("__Internal")]
-    private static extern IntPtr test_pointer_(IntPtr ptr);
-    [DllImport("__Internal")]
-    private static extern IntPtr test_pointer2_get_(int n);
-    [DllImport("__Internal")]
-    private static extern int test_pointer2_(IntPtr v);
-    [DllImport("__Internal")]
-    private static extern CS_Rect test_rect_(CS_Rect v);
-
-#else
-    [DllImport("TestPlugin")]
-    private static extern void test_();
-    [DllImport("TestPlugin")]
-    private static extern long test_long_(long v);
-    [DllImport("TestPlugin")]
-    private static extern float test_float_(float v);
-    [DllImport("TestPlugin")]
-    private static extern string test_string_(string v);
 #endif
 
     public static void Test()
