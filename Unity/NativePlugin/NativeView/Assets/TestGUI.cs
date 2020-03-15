@@ -61,10 +61,33 @@ public class TestGUI : MonoBehaviour
         {
             int[] v = new int[] { 4, 5, 6 };
             int n = v.Length;
-            TestPlugin.TestIntArrayRef(ref v, ref n);
+            TestPlugin.TestIntArrayRef( v, ref n);
+
             Debug.LogFormat("C# num={0}", n);
             Debug.LogFormat("C#:: length={0}, val={1},{2},{3}", n, v[0], v[1], v[2]);
             Debug.LogFormat("C#:: length={0}, val={1},{2},{3},{4}", n, v[0], v[1], v[2], v[3]);
+        }
+
+        if (GUI.Button(new Rect(450f, 250f, 150f, 80f), "int ref2", gs))
+        {
+            int[] v = new int[] { 4, 5, 6 };
+            int n = v.Length;
+
+            IntPtr ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(int)) * n);
+            Marshal.Copy(v, 0, ptr, n);
+
+
+            TestPlugin.TestIntArrayRef2( ptr, ref n);
+
+            var vv = new int[n];
+
+            Marshal.Copy(ptr, vv, 0, n);
+
+            Marshal.FreeCoTaskMem(ptr);
+
+            Debug.LogFormat("C# num={0}", n);
+            Debug.LogFormat("C#:: length={0}, val={1},{2},{3}", n, vv[0], vv[1], vv[2]);
+            Debug.LogFormat("C#:: length={0}, val={1},{2},{3},{4}", n, vv[0], vv[1], vv[2], vv[3]);
         }
 
         if (GUI.Button(new Rect(50f, 350f, 150f, 80f), "ptr", gs))

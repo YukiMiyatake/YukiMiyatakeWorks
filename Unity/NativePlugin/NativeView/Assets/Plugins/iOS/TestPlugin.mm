@@ -80,6 +80,7 @@ void test_intarray_(const int* v, int num){
     [TestPlugin TestIntArray:array];
     
 }
+
 void test_intarray_ref_(int** v, int* num){
     NSLog(@"Obj-C::test_intarray_ref_");
     NSMutableArray *array = [NSMutableArray array];
@@ -100,6 +101,10 @@ void test_intarray_ref_(int** v, int* num){
     NSLog(@"TestArray num=%d %d, %d, %d, %d", *num, *r, *(r+1), *(r+2), r[3]);
 
     *v = r;
+}
+
+void test_intarray_ref2_(int** v, int* num){
+    test_intarray_ref_(v,num);
 }
 
 

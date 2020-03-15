@@ -57,9 +57,13 @@ public class TestPlugin : MonoBehaviour
     {
         Debug.Log("IntArray");
     }
-    private static void test_intarray_ref_(ref int[] hoge, ref int num)
+    private static void test_intarray_ref_([In,Out] int[] hoge, ref int num)
     {
         Debug.Log("IntArrayRef");
+    }
+    private static void test_intarray_ref2_([In, Out] IntPtr hoge, ref int num)
+    {
+        Debug.Log("IntArrayRef2");
     }
 
     private static IntPtr test_pointer_(IntPtr ptr)
@@ -101,7 +105,9 @@ public class TestPlugin : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void test_intarray_(int[] hoge, int num);
     [DllImport("__Internal")]
-    private static extern void test_intarray_ref_(ref int[] hoge, ref int num);
+    private static extern void test_intarray_ref_([In,Out] int[] hoge, ref int num);
+    [DllImport("__Internal")]
+    private static extern void test_intarray_ref2_([In,Out] IntPtr hoge, ref int num);
     [DllImport("__Internal")]
     private static extern IntPtr test_pointer_(IntPtr ptr);
     [DllImport("__Internal")]
@@ -159,13 +165,17 @@ public class TestPlugin : MonoBehaviour
     }
 
 
-    public static void TestIntArray(int[] hoge, int num)
+    public static void TestIntArray(int[] v, int num)
     {
-        test_intarray_(hoge, num);
+        test_intarray_(v, num);
     }
-    public static void TestIntArrayRef(ref int[] hoge, ref int num)
+    public static void TestIntArrayRef([In, Out] int[] v, ref int num)
     {
-        test_intarray_ref_(ref hoge, ref num);
+        test_intarray_ref_( v, ref num);
+    }
+    public static void TestIntArrayRef2([In, Out] IntPtr v, ref int num)
+    {
+        test_intarray_ref2_( v, ref num);
     }
     public static IntPtr TestPointer(IntPtr ptr)
     {
