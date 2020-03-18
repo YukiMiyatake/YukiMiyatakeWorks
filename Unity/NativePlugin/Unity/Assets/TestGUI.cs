@@ -20,7 +20,7 @@ public class TestGUI : MonoBehaviour
         if (GUI.Button(new Rect(250f, 50f, 150f, 80f), "Long", gs))
         {
             Debug.Log("UNITY Long Button Click");
-            Debug.Log( TestPlugin.TestLong(1));
+            Debug.Log(TestPlugin.TestLong(1));
         }
         if (GUI.Button(new Rect(450f, 50f, 150f, 80f), "Float", gs))
         {
@@ -39,29 +39,29 @@ public class TestGUI : MonoBehaviour
         }
         if (GUI.Button(new Rect(450f, 150f, 150f, 80f), "Str out", gs))
         {
-//            string v;
+            //            string v;
             Debug.Log(TestPlugin.TestStringOut(out string v));
             Debug.Log(v);
         }
         if (GUI.Button(new Rect(650f, 150f, 150f, 80f), "Str ref", gs))
         {
-            string v="str ";
+            string v = "str ";
             Debug.Log(TestPlugin.TestStringRef(ref v));
             Debug.Log(v);
         }
 
         if (GUI.Button(new Rect(50f, 250f, 150f, 80f), "int array", gs))
         {
-            int[] v = new int[] { 1,2,3 };
+            int[] v = new int[] { 1, 2, 3 };
             int n = v.Length;
-            TestPlugin.TestIntArray(v,n);
+            TestPlugin.TestIntArray(v, n);
         }
 
         if (GUI.Button(new Rect(250f, 250f, 150f, 80f), "int ref", gs))
         {
             int[] v = new int[] { 4, 5, 6 };
             int n = v.Length;
-            TestPlugin.TestIntArrayRef( v, ref n);
+            TestPlugin.TestIntArrayRef(v, ref n);
 
             Debug.LogFormat("C# num={0}", n);
             Debug.LogFormat("C#:: length={0}, val={1},{2},{3}", n, v[0], v[1], v[2]);
@@ -77,7 +77,7 @@ public class TestGUI : MonoBehaviour
             Marshal.Copy(v, 0, ptr, n);
 
 
-            TestPlugin.TestIntArrayRef2( ptr, ref n);
+            TestPlugin.TestIntArrayRef2(ptr, ref n);
 
             var vv = new int[n];
 
@@ -107,7 +107,7 @@ public class TestGUI : MonoBehaviour
         if (GUI.Button(new Rect(250f, 350f, 150f, 80f), "ptr2 get", gs))
         {
             IntPtr ptr = TestPlugin.TestPointer2Get(1234);
-            Debug.Log( TestPlugin.TestPointer2(ptr));
+            Debug.Log(TestPlugin.TestPointer2(ptr));
         }
 
 
@@ -119,7 +119,23 @@ public class TestGUI : MonoBehaviour
             CS_Rect rc = TestPlugin.TestRect(rc0);
             Debug.LogFormat("RECT({0},{1},{2},{3})", rc.x, rc.y, rc.width, rc.height);
         }
+#if UNITY_ANDROID
+        if (GUI.Button(new Rect(50f, 450f, 150f, 80f), "native", gs))
+        {
+            Debug.Log("myplugin::TestNative");
+            TestPlugin.TestNative();
+        }
+        if (GUI.Button(new Rect(250f, 450f, 150f, 80f), "static", gs))
+        {
+            Debug.Log("myplugin::TestStatic");
+            TestPlugin.TestStatic();
+        }
+        if (GUI.Button(new Rect(450f, 450f, 150f, 80f), "instance", gs))
+        {
+            Debug.Log("myplugin::TestInstance");
+            TestPlugin.TestInstance();
+        }
 
-
+#endif
     }
 }

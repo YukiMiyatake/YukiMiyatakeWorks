@@ -10,16 +10,110 @@ public class CS_Rect{
     public float height;
 };
 
+
 public class TestPlugin : MonoBehaviour
 {
 
 #if UNITY_ANDROID
     [DllImport("myplugin")]
-    private static extern void test_native();
+    public static extern void TestNative();
 
-#endif
+    const string ANDROID_NATIVE_PLUGIN_CLASS = "com.example.myplugin";
 
-#if UNITY_IOS
+
+    public static void TestStatic()
+    {
+        using (AndroidJavaClass cls = new AndroidJavaClass(ANDROID_NATIVE_PLUGIN_CLASS))
+        {
+            cls.CallStatic("test_static");
+        }
+
+        Debug.Log("TestStatic");
+    }
+    public static void TestInstance()
+    {
+        using (AndroidJavaObject obj = new AndroidJavaObject(ANDROID_NATIVE_PLUGIN_CLASS))
+        {
+            obj.Call("test_instance");
+        }
+
+        Debug.Log("TestInstance");
+    }
+
+    public static void Test()
+    {
+        Debug.Log("Test");
+    }
+    public static long TestLong(long v)
+
+    {
+        Debug.Log("Long");
+        return v;
+    }
+    public static float TestFloat(float v)
+    {
+        Debug.Log("Float");
+        return v;
+    }
+    public static void TestString0(string v)
+    {
+        Debug.Log("String0");
+    }
+    public static string TestString(string v)
+    {
+        Debug.Log("String");
+        return v;
+    }
+    public static string TestStringIn(in string v)
+    {
+        Debug.Log("StringIn");
+        return v;
+    }
+    public static string TestStringOut(out string v)
+    {
+        Debug.Log("StringOut");
+        v = "new string";
+        return v;
+    }
+    public static string TestStringRef(ref string v)
+    {
+        Debug.Log("StringRef");
+        return v + "Ref";
+    }
+
+    public static void TestIntArray(int[] hoge, int num)
+    {
+        Debug.Log("IntArray");
+    }
+    public static void TestIntArrayRef([In, Out] int[] hoge, ref int num)
+    {
+        Debug.Log("IntArrayRef");
+    }
+    public static void TestIntArrayRef2([In, Out] IntPtr hoge, ref int num)
+    {
+        Debug.Log("IntArrayRef2");
+    }
+
+    public static IntPtr TestPointer(IntPtr ptr)
+    {
+        return (ptr);
+    }
+    public static IntPtr TestPointer2Get(int n)
+    {
+        return IntPtr.Zero;
+    }
+    public static int TestPointer2(IntPtr v)
+    {
+        return (2);
+    }
+
+    public static CS_Rect TestRect(CS_Rect v)
+    {
+        return (v);
+    }
+    //#endif
+
+#elif UNITY_IOS
     [DllImport("__Internal")]
     private static extern void test_();
     [DllImport("__Internal")]
@@ -51,80 +145,6 @@ public class TestPlugin : MonoBehaviour
     private static extern int test_pointer2_(IntPtr v);
     [DllImport("__Internal")]
     private static extern CS_Rect test_rect_(CS_Rect v);
-
-#else
-
-    private static void test_()
-    {
-        Debug.Log("Test");
-    }
-    private static long test_long_(long v)
-    {
-        Debug.Log("Long");
-        return v;
-    }
-    private static float test_float_(float v)
-    {
-        Debug.Log("Float");
-        return v;
-    }
-    private static void test_string0_(string v)
-    {
-        Debug.Log("String0");
-    }
-    private static string test_string_(string v)
-    {
-        Debug.Log("String");
-        return v;
-    }
-    private static string test_string_in_(in string v)
-    {
-        Debug.Log("StringIn");
-        return v;
-    }
-    private static string test_string_out_(out string v)
-    {
-        Debug.Log("StringOut");
-        v = "new string";
-        return v;
-    }
-    private static string test_string_ref_(ref string v)
-    {
-        Debug.Log("StringRef");
-        return v+"Ref";
-    }
-
-    private static void test_intarray_(int[] hoge, int num)
-    {
-        Debug.Log("IntArray");
-    }
-    private static void test_intarray_ref_([In,Out] int[] hoge, ref int num)
-    {
-        Debug.Log("IntArrayRef");
-    }
-    private static void test_intarray_ref2_([In, Out] IntPtr hoge, ref int num)
-    {
-        Debug.Log("IntArrayRef2");
-    }
-
-    private static IntPtr test_pointer_(IntPtr ptr)
-    {
-        return (ptr);
-    }
-    private static IntPtr test_pointer2_get_(int n)
-    {
-        return IntPtr.Zero;
-    }
-    private static int test_pointer2_(IntPtr v)
-    {
-        return (2);
-    }
-
-    private static CS_Rect test_rect_(CS_Rect v)
-    {
-        return (v);
-    }
-#endif
 
     public static void Test()
     {
@@ -193,5 +213,81 @@ public class TestPlugin : MonoBehaviour
     {
         return (test_rect_(v));
     }
+
+#else
+    public static void Test()
+    {
+        Debug.Log("Test");
+    }
+    public static long TestLong(long v)
+
+    {
+        Debug.Log("Long");
+        return v;
+    }
+    public static float TestFloat(float v)
+    {
+        Debug.Log("Float");
+        return v;
+    }
+    public static void TestString0(string v)
+    {
+        Debug.Log("String0");
+    }
+    public static string TestString(string v)
+    {
+        Debug.Log("String");
+        return v;
+    }
+    public static string TestStringIn(in string v)
+    {
+        Debug.Log("StringIn");
+        return v;
+    }
+    public static string TestStringOut(out string v)
+    {
+        Debug.Log("StringOut");
+        v = "new string";
+        return v;
+    }
+    public static string TestStringRef(ref string v)
+    {
+        Debug.Log("StringRef");
+        return v + "Ref";
+    }
+
+    public static void TestIntArray(int[] hoge, int num)
+    {
+        Debug.Log("IntArray");
+    }
+    public static void TestIntArrayRef([In, Out] int[] hoge, ref int num)
+    {
+        Debug.Log("IntArrayRef");
+    }
+    public static void TestIntArrayRef2([In, Out] IntPtr hoge, ref int num)
+    {
+        Debug.Log("IntArrayRef2");
+    }
+
+    public static IntPtr TestPointer(IntPtr ptr)
+    {
+        return (ptr);
+    }
+    public static IntPtr TestPointer2Get(int n)
+    {
+        return IntPtr.Zero;
+    }
+    public static int TestPointer2(IntPtr v)
+    {
+        return (2);
+    }
+
+    public static CS_Rect TestRect(CS_Rect v)
+    {
+        return (v);
+    }
+#endif
+
+
 }
 
