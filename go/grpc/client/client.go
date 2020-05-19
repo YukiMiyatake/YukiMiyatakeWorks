@@ -1,4 +1,4 @@
-package client
+package main
 
 import (
 	"context"
@@ -18,5 +18,5 @@ func main() {
 	client := pb.NewHelloClient(conn)
 	msg := &pb.HelloRequest{Msg: "World!"}
 	res, err := client.Hello(context.TODO(), msg)
-	fmt.Printf("result:%#v \n", res)
+	fmt.Printf("response={%s} \n", res)
 }

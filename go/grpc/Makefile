@@ -4,10 +4,12 @@ OUTPUT=$(PROJECTNAME)
 all: build
 
 build:
-	go build -v -o $(OUTPUT) .
+	go build -v -o $(OUTPUT) ./server
+	go build -v -o $(OUTPUT) ./client
 
 test:
-	gotest -v -cover -coverprofile=coverage.out ...
+	gotest -v -cover -coverprofile=coverage.out ./server
+	gotest -v -cover -coverprofile=coverage.out ./client
 
 cover: test
 	go tool cover -func=coverage.out

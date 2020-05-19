@@ -1,7 +1,8 @@
-package server
+package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -14,19 +15,25 @@ type HelloService struct {
 }
 
 func (s *HelloService) Hello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
+	msg := "Hello " + req.GetMsg()
+	fmt.Printf("string={%s} \n", req.String())
+
+	fmt.Printf("request={%s} \n", req)
+	fmt.Printf("request={%s} \n", msg)
+
 	return &pb.HelloResponse{
-		Msg: "Hello " + req.Msg,
+		Msg: msg,
 	}, nil
 }
 
 func main() {
-	listenPort, err := net.Listen("tcp", ":10000")
+	conn, err := net.Listen("tcp", ":10000")
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	server := grpc.NewServer()
 	helloService := &HelloService{}
 
 	pb.RegisterHelloServer(server, helloService)
-	server.Serve(listenPort)
+	server.Serve(conn)
 }
