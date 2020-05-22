@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	pb "grpc/pb"
 	"log"
+
+	pb "grpc/pb"
 
 	"google.golang.org/grpc"
 )
@@ -16,7 +17,11 @@ func main() {
 	}
 	defer conn.Close()
 	client := pb.NewHelloClient(conn)
-	msg := &pb.HelloRequest{Msg: "World!"}
-	res, err := client.Hello(context.TODO(), msg)
-	fmt.Printf("response={%s} \n", res)
+
+	fmt.Printf(sayHello(client, "World!"))
+}
+
+func sayHello(client pb.HelloClient, msg string) string {
+	res, _ := client.Hello(context.TODO(), &pb.HelloRequest{Msg: msg})
+	return res.GetMsg()
 }
