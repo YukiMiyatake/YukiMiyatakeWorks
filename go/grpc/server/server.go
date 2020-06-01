@@ -11,9 +11,11 @@ import (
 	"google.golang.org/grpc"
 )
 
+// HelloService is gRPC service
 type HelloService struct {
 }
 
+// Hello implements
 func (s *HelloService) Hello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
 	msg := "Hello " + req.GetMsg()
 	fmt.Printf("string={%s} \n", req.String())
@@ -27,13 +29,18 @@ func (s *HelloService) Hello(ctx context.Context, req *pb.HelloRequest) (*pb.Hel
 }
 
 func main() {
-	conn, err := net.Listen("tcp", ":10000")
+	con, err := net.Listen("tcp", ":10000")
 	if err != nil {
 		log.Println(err)
 	}
 	server := grpc.NewServer()
+
 	helloService := &HelloService{}
 
 	pb.RegisterHelloServer(server, helloService)
-	server.Serve(conn)
+	server.Serve(con)
+}
+
+func serve() {
+
 }
