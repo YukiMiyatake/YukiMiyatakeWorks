@@ -1,0 +1,12 @@
+﻿
+水彩画シェーダー予定
+
+
+https://www.slideshare.net/drecom/cedec-2016-metal-vulkan
+１，Gバッファつかっていろいろ
+DiffuseMap  ハッチング含むアウトライン
+絵の具のにじみ方向のVectorMap
+
+ComputeKernelで水彩表現
+コンポジット
+
