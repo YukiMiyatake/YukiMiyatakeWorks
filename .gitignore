@@ -1,1 +1,4 @@
 regina
+go/grpc/client/client
+go/grpc/server/server
+*.out
