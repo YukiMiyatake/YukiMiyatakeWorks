@@ -1,6 +1,5 @@
 fileFormatVersion: 2
-guid: 5ad99e2446f6f450185b777a22f98f2a
-folderAsset: yes
+guid: dcea88fe4c88944a8a69fdedd456737e
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -13,29 +12,24 @@ PluginImporter:
   validateReferences: 1
   platformData:
   - first:
-      '': Linux
+      '': Any
     second:
       enabled: 0
       settings:
-        CPU: x86
-  - first:
-      '': OSXIntel
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      '': OSXIntel64
-    second:
-      enabled: 1
-      settings:
-        CPU: x86_64
+        Exclude Android: 1
+        Exclude Editor: 1
+        Exclude Linux64: 1
+        Exclude OSXUniversal: 1
+        Exclude WebGL: 1
+        Exclude Win: 1
+        Exclude Win64: 1
+        Exclude iOS: 0
   - first:
       Android: Android
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: ARMv7
   - first:
       Any: 
     second:
@@ -44,11 +38,11 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 1
+      enabled: 0
       settings:
         CPU: AnyCPU
         DefaultValueInitialized: true
-        OS: OSX
+        OS: AnyOS
   - first:
       Facebook: Win
     second:
@@ -71,7 +65,8 @@ PluginImporter:
       Standalone: OSXUniversal
     second:
       enabled: 0
-      settings: {}
+      settings:
+        CPU: AnyCPU
   - first:
       Standalone: Win
     second:
@@ -87,10 +82,12 @@ PluginImporter:
   - first:
       iPhone: iOS
     second:
-      enabled: 0
+      enabled: 1
       settings:
+        AddToEmbeddedBinaries: false
+        CPU: AnyCPU
         CompileFlags: 
-        FrameworkDependencies: 
+        FrameworkDependencies: SafariServices;
   userData: 
   assetBundleName: 
   assetBundleVariant: 
